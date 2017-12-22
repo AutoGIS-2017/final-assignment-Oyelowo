@@ -48,6 +48,21 @@ ui= [int(x) for x in input("list the ID-numbers you want to read and separate ea
 namelist= z.namelist()
 
 
+lk=[]
+for filename in namelist:
+    for element in ui:
+        if str(element) in filename:
+#            print(namelist.index(filename))
+            #slice the string
+            lk.append(element)
+            f_slice=filename[44:]
+            print("processing file {0}.. Progress: {1}/{2}".format(f_slice,len([i for i in range(len(lk))]), len(lk)))
+            bytes = z.read(filename)
+            print('has',len(bytes),'bytes')
+
+        
+
+
 
 for filename in namelist:
     for element in ui:
@@ -58,12 +73,6 @@ for filename in namelist:
             print("processing file {0}.. Progress: {1}/{2}".format(f_slice,len(ui)-ui.index(element), len(ui)))
             bytes = z.read(filename)
             print('has',len(bytes),'bytes')
-
-        
-
-
-
-
 
 
 
