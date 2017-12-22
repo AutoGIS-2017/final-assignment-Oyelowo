@@ -46,14 +46,7 @@ def extractfiles(data=data_zip):
     specified by user'''
 #ui is userinput
     userinput= [int(x) for x in input("list the ID-numbers you want to read and separate each by a comma(,): ").split(',')]
-#    return ui
-    
-    
-    #[int(x) for x in aa]
-    #6016696, 6015141, 5991603, 5991515, 5789455,9485399, 5789456, 4,2545,54646, 5802791, 8897
-    
-    #xx="HelsinkiRegion_TravelTimeMatrix2015/6016xxx/travel_times_to_ 6016696.txt"
-    #xx[44:]
+
     #Extract the names of all the lists from the zipped file
     namelist= data_zip.namelist()
     
@@ -78,7 +71,7 @@ def extractfiles(data=data_zip):
                 #IDs(i.7) and are also in the zip folders(i.e filename)
                 m_list.append(element)
                 
-                #
+                #check for the progress
                 print("Processing file travel_times_to_{0}.txt.. Progress: {1}/{2}".format(element,len([i for i in range(len(m_list))]), len(m_list)))
                 
                 #The above can also simply be done as below
@@ -88,13 +81,13 @@ def extractfiles(data=data_zip):
                 #print("processing file {0}.. Progress: {1}/{2}".format(f_slice,len([i for i in range(len(m_list))]), len(m_list)))
                 
                 #read the file
-                bytes = z.read(filename)
+                bytes = data_zip.read(filename)
                 
                 #print the file size
                 print('has',len(bytes),'bytes')
                 
                 #extract the files
-                z.extract(filename)
+                data_zip.extract(filename)
     #put into an object the inputs are not in the matrix list(i.e which of the specified is not in the zipped matrices)
     absentinput= [i for i in userinput if i not in m_list]
     
@@ -113,121 +106,11 @@ def extractfiles(data=data_zip):
 #                print('d')
 extractfiles(data=data_zip)
 
-    
-            
-            
-            
-
-        if str(element) not in filename:
-            ele= 'HelsinkiRegion_TravelTimeMatrix2015/{0}xxx/travel_times_to_ {1}.txt'.format(str(element)[0:4],str(element))
-            #nlk.append(ele)
-            #[i for i in lk if i in namelist] 
-            if any(x in lk for x in namelist)== False:
-                nlk.append(element)
-
-
-
-
-
-
-
-
-for filename in namelist:
-    for element in ui:
-        if str(element) in filename:
-#            print(namelist.index(filename))
-            #slice the string
-            f_slice=filename[44:]
-            print("processing file {0}.. Progress: {1}/{2}".format(f_slice,len(ui)-ui.index(element), len(ui)))
-            bytes = z.read(filename)
-            print('has',len(bytes),'bytes')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# =============================================================================
-# ele= 'HelsinkiRegion_TravelTimeMatrix2015/{0}xxx/travel_times_to_ {1}.txt'.format(str(element)[0:3],str(element))
-# 
-# 
-# d='HelsinkiRegion_TravelTimeMatrix2015/5787xxx/travel_times_to_ 5787544.txt'
-# ff_slice= d[60:68]
-# ff_slice
-# 
-# lk=[]
-# for filename in namelist:
-#     for element in ui:
-#         if str(element) in filename:
-#             ele= 'HelsinkiRegion_TravelTimeMatrix2015/{0}xxx/travel_times_to_ {1}.txt'.format(str(element)[0:4],str(element))
-#             lk.append(ele)
-#             [i for i in lk if i in namelist] 
-#             if any(x in lk for x in namelist)== False:
-#             
-#                 print("rt")
-#             print(ele)
-#             print(namelist.index(filename))
-#             #slice the string
-#             f_slice=filename[44:]
-#             print("processing file {0}.. Progress: {1}/{2}".format(f_slice,len(ui)-ui.index(element), len(ui)))
-#             bytes = z.read(filename)
-#             print('has',len(bytes),'bytes')
-#     if str(element) not in filename:
-#         print("fire")
-#         
-# 
-# ele= 'HelsinkiRegion_TravelTimeMatrix2015/{0}xxx/travel_times_to_ {1}.txt'.format(str(element)[0:3],str(element))
-# 
-# 
-# d='HelsinkiRegion_TravelTimeMatrix2015/5787xxx/travel_times_to_ 5787544.txt'
-# ff_slice= d[60:68]
-# ff_slice
-# 
-# L1 = ui
-# L2 = namelist
-# [i for i in L1 if i in L2]
-# [2]
-#print(any(x in lk for x in namelist))
-#
-#bytes 
-# =============================================================================
-
-
-
  
-# =============================================================================
-    
-    
 
-# =============================================================================
-# for filename in z.namelist():
-#     print('File:', filename,)
-#     bytes = z.read(filename)
-#     print('has',len(bytes),'bytes')
-#     break
-# =============================================================================
+#For testing
+#[int(x) for x in aa]
+    #6016696, 6015141, 5991603, 5991515, 5789455,9485399, 5789456, 4,2545,54646, 5802791, 8897
+    
+    #xx="HelsinkiRegion_TravelTimeMatrix2015/6016xxx/travel_times_to_ 6016696.txt"
+    #xx[44:]
