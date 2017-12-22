@@ -38,22 +38,26 @@ mtp= gpd.read_file(metropo)
 #print("these are the numbers{0}".format(aa))
 #type(aa)
 
-aa= [int(x) for x in input("list the ID-numbers you want to read and separate each by a comma(,): ").split(',')]
+#ui is userinput
+ui= [int(x) for x in input("list the ID-numbers you want to read and separate each by a comma(,): ").split(',')]
 #[int(x) for x in aa]
 #6016696, 6015141, 5991603, 5991515
 
 #xx="HelsinkiRegion_TravelTimeMatrix2015/6016xxx/travel_times_to_ 6016696.txt"
 #xx[44:]
-nl= z.namelist()
+namelist= z.namelist()
 
-for f in nl:
-    for i in aa:
-        if str(i) in f:
+for filename in namelist:
+    for element in ui:
+        if str(element) in filename:
             #slice the string
-            f_slice=f[44:]
-            print("processing file {0}.. Progress: {1}/{2}".format(f_slice,len(aa)-aa.index(i), len(aa)))
-
+            f_slice=filename[44:]
+            print("processing file {0}.. Progress: {1}/{2}".format(f_slice,len(ui)-ui.index(element), len(ui)))
+            bytes = z.read(filename)
+            print('has',len(bytes),'bytes')
+        
      
+bytes  
 # =============================================================================
     
     
