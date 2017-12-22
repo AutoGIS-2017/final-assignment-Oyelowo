@@ -4,13 +4,14 @@ Created on Fri Dec 22 10:15:11 2017
 
 @author: oyeda
 """
-#import geopandas as gpd
-#import zipfile
-##fp= "http://blogs.helsinki.fi/accessibility/helsinki-region-travel-time-matrix-2015/"
-#fp=r"C:\Users\oyeda\Desktop\AUTOGIS\FINAL_ASSIGNMENT"
-#data_zip = zipfile.ZipFile((fp+"\HelsinkiRegion_TravelTimeMatrix2015.zip"), "r")
-#metropo=r"C:\Users\oyeda\Desktop\AUTOGIS\FINAL_ASSIGNMENT\MetropAccess_YKR_grid\MetropAccess_YKR_grid_EurefFIN.shp"
-#
+import geopandas as gpd
+import pandas as pd
+import zipfile
+#fp= "http://blogs.helsinki.fi/accessibility/helsinki-region-travel-time-matrix-2015/"
+fp=r"C:\Users\oyeda\Desktop\AUTOGIS\FINAL_ASSIGNMENT"
+data_zip = zipfile.ZipFile((fp+"\HelsinkiRegion_TravelTimeMatrix2015.zip"), "r")
+grid_shp=gpd.read_file(r"C:\Users\oyeda\Desktop\AUTOGIS\FINAL_ASSIGNMENT\MetropAccess_YKR_grid\MetropAccess_YKR_grid_EurefFIN.shp")
+#grid_shp.plot()
 #mtp= gpd.read_file(metropo)
 #for i,rows in z.
 # =============================================================================
@@ -50,7 +51,7 @@ class lowo:
         specified by user'''
     #ui is userinput
         userinput= [int(x) for x in input("list the ID-numbers you want to read and separate each by a comma(,): ").split(',')]
-    
+    #This can also be done by just including the list in the argument.
         #Extract the names of all the lists from the zipped file
         namelist= data_zip.namelist()
         
@@ -86,12 +87,17 @@ class lowo:
                     
                     #read the file
                     bytes = data_zip.read(filename)
-                    
                     #print the file size
                     print('has',len(bytes),'bytes')
                     
                     #extract the files
                     data_zip.extract(filename)
+                    
+#                    kk = pd.read_csv(filename, sep=";")
+#                    for i in kk:
+#                        print(i)
+
+                    
         #put into an object the inputs are not in the matrix list(i.e which of the specified is not in the zipped matrices)
         absentinput= [i for i in userinput if i not in m_list]
         
@@ -109,8 +115,30 @@ class lowo:
      #           if any(x in lk for x in ui)== False:
     #                print('d')
 #extractfiles(data=data_zip)
-
- 
+    
+    def readzip(data_zip,userinput, grid_shp):
+        #userinput= [int(x) for x in input("list the ID-numbers you want to read and separate each by a comma(,): ").split(',')]
+        namelist= data_zip.namelist()
+        for filename in namelist:
+            for element in userinput:
+                if len(str(element))==7 and str(element) in filename:
+                    tt_matrices= pd.read_csv(filename, sep=";", usecols=["pt_r_tt", "from_id", "to_id"])
+                    #I used the max function below because there are nodata rows marked with -1
+                    #hence, unique() might not work as wanted because there would be -1 and the to_id number of the dataframa"
+                    #I had to first convert to integer becase without this, it was adding .0 which will affect later
+                    destination = str((tt_matrices["to_id"].max()).astype(int))
+                    #rename travel time columns tohave unique id
+                    tt_matrices.rename(columns = {"pt_r_tt": ("pt_r_tt_" + destination)}, inplace = True)
+                    #The above can also be done by following the next two steps below:
+                #    tt_col_id = dict({"pt_r_tt": ("pt_r_tt_" + destination) })
+                #    aa.rename(columns = tt_col_id, inplace=True)
+                    #merge the grid with the  travel time matrices
+                    grid_shp = grid_shp.merge(tt_matrices,  left_on="YKR_ID", right_on="from_id")
+                    
+    
+    
+kk= pd.read_csv(bytes, sep=";")
+jj=open(bytes, "r")
 
 #For testing
 #[int(x) for x in aa]
