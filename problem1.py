@@ -8,7 +8,7 @@ import geopandas as gpd
 import zipfile
 #fp= "http://blogs.helsinki.fi/accessibility/helsinki-region-travel-time-matrix-2015/"
 fp=r"C:\Users\oyeda\Desktop\AUTOGIS\FINAL_ASSIGNMENT"
-z = zipfile.ZipFile((fp+"\HelsinkiRegion_TravelTimeMatrix2015.zip"), "r")
+data_zip = zipfile.ZipFile((fp+"\HelsinkiRegion_TravelTimeMatrix2015.zip"), "r")
 metropo=r"C:\Users\oyeda\Desktop\AUTOGIS\FINAL_ASSIGNMENT\MetropAccess_YKR_grid\MetropAccess_YKR_grid_EurefFIN.shp"
 
 mtp= gpd.read_file(metropo)
@@ -37,39 +37,83 @@ mtp= gpd.read_file(metropo)
 #aa= [int(x) for x in input("list the ID-numbers you want to read and separate each by a comma(,): ").split(',')]
 #print("these are the numbers{0}".format(aa))
 #type(aa)
-
+def extractfiles(data=data_zip):
+    '''
+    data: this is the zipped data which should be specified.
+    This function extracts matrices(files) from the zipped Helsinki Region Travel
+    Time Matrix, according to the userinputs(matrix ID). It also states if
+    the specified input is not included in the matrices
+    specified by user'''
 #ui is userinput
-ui= [int(x) for x in input("list the ID-numbers you want to read and separate each by a comma(,): ").split(',')]
-#[int(x) for x in aa]
-#6016696, 6015141, 5991603, 5991515, 5789455,9485399, 5789456, 4,2545,54646, 5802791, 8897
+    userinput= [int(x) for x in input("list the ID-numbers you want to read and separate each by a comma(,): ").split(',')]
+#    return ui
+    
+    
+    #[int(x) for x in aa]
+    #6016696, 6015141, 5991603, 5991515, 5789455,9485399, 5789456, 4,2545,54646, 5802791, 8897
+    
+    #xx="HelsinkiRegion_TravelTimeMatrix2015/6016xxx/travel_times_to_ 6016696.txt"
+    #xx[44:]
+    #Extract the names of all the lists from the zipped file
+    namelist= data_zip.namelist()
+    
+    #create an empty list
+    m_list=[]
+    #iterate over all the names in the namelist of the zipped folders
+    for filename in namelist:
+        #iterate over the userinput, to get all its element/values
+        for element in userinput:
+            #when each element is converted to string, check if the length
+            #of the string is equal to normal length of every matrix ID(i.e, 7)
+            # and also if the element is in the filename in the namelist
+            if len(str(element))==7 and str(element) in filename:
+                #the below can also be used to know which of the filenames exactly
+                #print(filename)
+                
+                #this can be used to know its index in the list
+                #print(namelist.index(filename))
+                
+                #now, append the element to the matrix list which now includes
+                #the imputed values by user which are equal to the normal length of the 
+                #IDs(i.7) and are also in the zip folders(i.e filename)
+                m_list.append(element)
+                
+                #
+                print("Processing file travel_times_to_{0}.txt.. Progress: {1}/{2}".format(element,len([i for i in range(len(m_list))]), len(m_list)))
+                
+                #The above can also simply be done as below
+                #slice the string. This is used for the following step, just
+                #to know which of the matrix is presently being extracted.
+                #f_slice=filename[44:]
+                #print("processing file {0}.. Progress: {1}/{2}".format(f_slice,len([i for i in range(len(m_list))]), len(m_list)))
+                
+                #read the file
+                bytes = z.read(filename)
+                
+                #print the file size
+                print('has',len(bytes),'bytes')
+                
+                #extract the files
+                z.extract(filename)
+    #put into an object the inputs are not in the matrix list(i.e which of the specified is not in the zipped matrices)
+    absentinput= [i for i in userinput if i not in m_list]
+    
+    #check if all of the imputed values does not exist
+    if len(absentinput)==len(userinput):
+        print("all the inputs do not exist")
+        
+        #check for those that are not included in the matrices
+    elif any(absentinput) not in m_list:
+        #warn that they do not exist
+        print("WARNING: ", absentinput, ".txt do not exist")
+        #check how many of them are not in the matrices
+        print(len(absentinput), "of the inputs are not included in the matrices")            
 
-#xx="HelsinkiRegion_TravelTimeMatrix2015/6016xxx/travel_times_to_ 6016696.txt"
-#xx[44:]
-namelist= z.namelist()
-
-#list of matrices
-m_list=[]
-for filename in namelist:
-    for element in ui:
-        if len(str(element))==7 and str(element) in filename:
-            print(filename)
-            print(namelist.index(filename))
-            #slice the string
-            m_list.append(element)
-            f_slice=filename[44:]
-            print("processing file {0}.. Progress: {1}/{2}".format(f_slice,len([i for i in range(len(m_list))]), len(m_list)))
-            bytes = z.read(filename)
-            print('has',len(bytes),'bytes')
-            z.extract(filename)
-print("WARNING: ", [i for i in ui if i not in m_list], ".txt does not exist")
-            
-#            if any(x in lk for x in ui)== False:
+ #           if any(x in lk for x in ui)== False:
 #                print('d')
-            
-     z.extract       
-for i in bytes:
-    print(i)    
-            
+extractfiles(data=data_zip)
+
+    
             
             
             
