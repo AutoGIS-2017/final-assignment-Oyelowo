@@ -41,23 +41,108 @@ mtp= gpd.read_file(metropo)
 #ui is userinput
 ui= [int(x) for x in input("list the ID-numbers you want to read and separate each by a comma(,): ").split(',')]
 #[int(x) for x in aa]
-#6016696, 6015141, 5991603, 5991515
+#6016696, 6015141, 5991603, 5991515, 5789455,9485399, 5789456, 5802791
 
 #xx="HelsinkiRegion_TravelTimeMatrix2015/6016xxx/travel_times_to_ 6016696.txt"
 #xx[44:]
 namelist= z.namelist()
 
+
+
 for filename in namelist:
     for element in ui:
         if str(element) in filename:
+#            print(namelist.index(filename))
             #slice the string
             f_slice=filename[44:]
             print("processing file {0}.. Progress: {1}/{2}".format(f_slice,len(ui)-ui.index(element), len(ui)))
             bytes = z.read(filename)
             print('has',len(bytes),'bytes')
+
         
-     
-bytes  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# =============================================================================
+# ele= 'HelsinkiRegion_TravelTimeMatrix2015/{0}xxx/travel_times_to_ {1}.txt'.format(str(element)[0:3],str(element))
+# 
+# 
+# d='HelsinkiRegion_TravelTimeMatrix2015/5787xxx/travel_times_to_ 5787544.txt'
+# ff_slice= d[60:68]
+# ff_slice
+# 
+# lk=[]
+# for filename in namelist:
+#     for element in ui:
+#         if str(element) in filename:
+#             ele= 'HelsinkiRegion_TravelTimeMatrix2015/{0}xxx/travel_times_to_ {1}.txt'.format(str(element)[0:4],str(element))
+#             lk.append(ele)
+#             [i for i in lk if i in namelist] 
+#             if any(x in lk for x in namelist)== False:
+#             
+#                 print("rt")
+#             print(ele)
+#             print(namelist.index(filename))
+#             #slice the string
+#             f_slice=filename[44:]
+#             print("processing file {0}.. Progress: {1}/{2}".format(f_slice,len(ui)-ui.index(element), len(ui)))
+#             bytes = z.read(filename)
+#             print('has',len(bytes),'bytes')
+#     if str(element) not in filename:
+#         print("fire")
+#         
+# 
+# ele= 'HelsinkiRegion_TravelTimeMatrix2015/{0}xxx/travel_times_to_ {1}.txt'.format(str(element)[0:3],str(element))
+# 
+# 
+# d='HelsinkiRegion_TravelTimeMatrix2015/5787xxx/travel_times_to_ 5787544.txt'
+# ff_slice= d[60:68]
+# ff_slice
+# 
+# L1 = ui
+# L2 = namelist
+# [i for i in L1 if i in L2]
+# [2]
+#print(any(x in lk for x in namelist))
+#
+#bytes 
+# =============================================================================
+
+
+
+ 
 # =============================================================================
     
     
