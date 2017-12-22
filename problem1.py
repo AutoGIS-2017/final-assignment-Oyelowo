@@ -41,26 +41,48 @@ mtp= gpd.read_file(metropo)
 #ui is userinput
 ui= [int(x) for x in input("list the ID-numbers you want to read and separate each by a comma(,): ").split(',')]
 #[int(x) for x in aa]
-#6016696, 6015141, 5991603, 5991515, 5789455,9485399, 5789456, 5802791
+#6016696, 6015141, 5991603, 5991515, 5789455,9485399, 5789456, 5802791, 8897
 
 #xx="HelsinkiRegion_TravelTimeMatrix2015/6016xxx/travel_times_to_ 6016696.txt"
 #xx[44:]
 namelist= z.namelist()
 
-
-lk=[]
+#list of matrices
+m_list=[]
 for filename in namelist:
     for element in ui:
         if str(element) in filename:
-#            print(namelist.index(filename))
+            print(filename)
+            print(namelist.index(filename))
             #slice the string
-            lk.append(element)
+            m_list.append(element)
             f_slice=filename[44:]
-            print("processing file {0}.. Progress: {1}/{2}".format(f_slice,len([i for i in range(len(lk))]), len(lk)))
+            print("processing file {0}.. Progress: {1}/{2}".format(f_slice,len([i for i in range(len(m_list))]), len(m_list)))
             bytes = z.read(filename)
             print('has',len(bytes),'bytes')
+print("WARNING: ", [i for i in ui if i not in m_list], ".txt does not exist")
+            
+#            if any(x in lk for x in ui)== False:
+#                print('d')
+            
+            
+            
+            
+            
+            
+            
 
-        
+        if str(element) not in filename:
+            ele= 'HelsinkiRegion_TravelTimeMatrix2015/{0}xxx/travel_times_to_ {1}.txt'.format(str(element)[0:4],str(element))
+            #nlk.append(ele)
+            #[i for i in lk if i in namelist] 
+            if any(x in lk for x in namelist)== False:
+                nlk.append(element)
+
+
+
+
+
 
 
 
