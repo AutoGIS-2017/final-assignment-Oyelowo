@@ -8,9 +8,9 @@ import geopandas as gpd
 import pandas as pd
 import zipfile
 #fp= "http://blogs.helsinki.fi/accessibility/helsinki-region-travel-time-matrix-2015/"
-fp=r"C:\Users\oyeda\Desktop\AUTOGIS\FINAL_ASSIGNMENT"
-data_zip = zipfile.ZipFile((fp+"\HelsinkiRegion_TravelTimeMatrix2015.zip"), "r")
-grid_shp=gpd.read_file(r"C:\Users\oyeda\Desktop\AUTOGIS\FINAL_ASSIGNMENT\MetropAccess_YKR_grid\MetropAccess_YKR_grid_EurefFIN.shp")
+#fp=r"C:\Users\oyeda\Desktop\AUTOGIS\FINAL_ASSIGNMENT"
+#data_zip = zipfile.ZipFile((fp+"\HelsinkiRegion_TravelTimeMatrix2015.zip"), "r")
+#grid_shp=gpd.read_file(r"C:\Users\oyeda\Desktop\AUTOGIS\FINAL_ASSIGNMENT\MetropAccess_YKR_grid\MetropAccess_YKR_grid_EurefFIN.shp")
 #grid_shp.plot()
 #mtp= gpd.read_file(metropo)
 #for i,rows in z.
@@ -118,8 +118,8 @@ class lowo:
     
     
     
-    
-    def readzip(data_zip,userinput, grid_shp):
+class zip2shp:   
+    def readzip(data_zip,userinput, grid_shp, filepath):
         #userinput= [int(x) for x in input("list the ID-numbers you want to read and separate each by a comma(,): ").split(',')]
         namelist= data_zip.namelist()
         for filename in namelist:
@@ -128,59 +128,69 @@ class lowo:
                     tt_matrices= pd.read_csv(filename, sep=";")
                     merged_metro = pd.merge(grid_shp,tt_matrices,  left_on="YKR_ID", right_on="from_id")
                     print(merged_metro)
-                    merged_metro.to_file(driver = 'ESRI Shapefile', filename= fp+"/merged.shp"+str(element))
+                    merged_metro.to_file(driver = 'ESRI Shapefile', filename= filepath+"/merged.shp"+str(element))
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    def readzipAall(data_zip,userinput, grid_shp):
-        #userinput= [int(x) for x in input("list the ID-numbers you want to read and separate each by a comma(,): ").split(',')]
+      
+    def readzipPrompt(data_zip, grid_shp, filepath):
+        userinput= [int(x) for x in input("list the ID-numbers you want to read and separate each by a comma(,): ").split(',')]
         namelist= data_zip.namelist()
         for filename in namelist:
             for element in userinput:
                 if len(str(element))==7 and str(element) in filename:
                     tt_matrices= pd.read_csv(filename, sep=";")
-                    #print(tt_matrices)
-                    #I used the max function below because there are nodata rows marked with -1
-                    #hence, unique() might not work as wanted because there would be -1 and the to_id number of the dataframa"
-                    #I had to first convert to integer becase without this, it was adding .0 which will affect later
-                    destination = str((tt_matrices["to_id"].max()).astype(int))
-                    #rename travel time columns tohave unique id
-                    tt_matrices.columns = [str(col) + destination for col in tt_matrices.columns]
-                    #tt_matrices.rename(columns = {"pt_r_tt": ("pt_r_tt_" + destination)}, inplace = True)
-                    #The above can also be done by following the next two steps below:
-                #    tt_col_id = dict({"pt_r_tt": ("pt_r_tt_" + destination) })
-                #    aa.rename(columns = tt_col_id, inplace=True)
-                    #merge the grid with the  travel time matrices
-                    grid_shp = grid_shp.merge(tt_matrices,  left_on="YKR_ID", right_on="from_id")
-                    
+                    merged_metro = pd.merge(grid_shp,tt_matrices,  left_on="YKR_ID", right_on="from_id")
+                    print(merged_metro)
+                    merged_metro.to_file(driver = 'ESRI Shapefile', filename= filepath+"/merged.shp"+str(element))
     
     
-kk= pd.read_csv(bytes, sep=";")
-jj=open(bytes, "r")
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+#    def readzipAall(data_zip,userinput, grid_shp):
+#        #userinput= [int(x) for x in input("list the ID-numbers you want to read and separate each by a comma(,): ").split(',')]
+#        namelist= data_zip.namelist()
+#        for filename in namelist:
+#            for element in userinput:
+#                if len(str(element))==7 and str(element) in filename:
+#                    tt_matrices= pd.read_csv(filename, sep=";")
+#                    #print(tt_matrices)
+#                    #I used the max function below because there are nodata rows marked with -1
+#                    #hence, unique() might not work as wanted because there would be -1 and the to_id number of the dataframa"
+#                    #I had to first convert to integer becase without this, it was adding .0 which will affect later
+#                    destination = str((tt_matrices["to_id"].max()).astype(int))
+#                    #rename travel time columns tohave unique id
+#                    tt_matrices.columns = [str(col) + destination for col in tt_matrices.columns]
+#                    #tt_matrices.rename(columns = {"pt_r_tt": ("pt_r_tt_" + destination)}, inplace = True)
+#                    #The above can also be done by following the next two steps below:
+#                #    tt_col_id = dict({"pt_r_tt": ("pt_r_tt_" + destination) })
+#                #    aa.rename(columns = tt_col_id, inplace=True)
+#                    #merge the grid with the  travel time matrices
+#                    grid_shp = grid_shp.merge(tt_matrices,  left_on="YKR_ID", right_on="from_id")
+#                    
+#    
+#    
+#kk= pd.read_csv(bytes, sep=";")
+#jj=open(bytes, "r")
 
 #For testing
 #[int(x) for x in aa]
