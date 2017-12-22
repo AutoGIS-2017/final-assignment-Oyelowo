@@ -116,19 +116,61 @@ class lowo:
     #                print('d')
 #extractfiles(data=data_zip)
     
+    
+    
+    
     def readzip(data_zip,userinput, grid_shp):
         #userinput= [int(x) for x in input("list the ID-numbers you want to read and separate each by a comma(,): ").split(',')]
         namelist= data_zip.namelist()
         for filename in namelist:
             for element in userinput:
                 if len(str(element))==7 and str(element) in filename:
-                    tt_matrices= pd.read_csv(filename, sep=";", usecols=["pt_r_tt", "from_id", "to_id"])
+                    tt_matrices= pd.read_csv(filename, sep=";")
+                    merged_metro = pd.merge(grid_shp,tt_matrices,  left_on="YKR_ID", right_on="from_id")
+                    print(merged_metro)
+                    merged_metro.to_file(driver = 'ESRI Shapefile', filename= fp+"/merged.shp"+str(element))
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    def readzipAall(data_zip,userinput, grid_shp):
+        #userinput= [int(x) for x in input("list the ID-numbers you want to read and separate each by a comma(,): ").split(',')]
+        namelist= data_zip.namelist()
+        for filename in namelist:
+            for element in userinput:
+                if len(str(element))==7 and str(element) in filename:
+                    tt_matrices= pd.read_csv(filename, sep=";")
+                    #print(tt_matrices)
                     #I used the max function below because there are nodata rows marked with -1
                     #hence, unique() might not work as wanted because there would be -1 and the to_id number of the dataframa"
                     #I had to first convert to integer becase without this, it was adding .0 which will affect later
                     destination = str((tt_matrices["to_id"].max()).astype(int))
                     #rename travel time columns tohave unique id
-                    tt_matrices.rename(columns = {"pt_r_tt": ("pt_r_tt_" + destination)}, inplace = True)
+                    tt_matrices.columns = [str(col) + destination for col in tt_matrices.columns]
+                    #tt_matrices.rename(columns = {"pt_r_tt": ("pt_r_tt_" + destination)}, inplace = True)
                     #The above can also be done by following the next two steps below:
                 #    tt_col_id = dict({"pt_r_tt": ("pt_r_tt_" + destination) })
                 #    aa.rename(columns = tt_col_id, inplace=True)
