@@ -51,7 +51,7 @@ for f in nl:
         if str(i) in f:
             #slice the string
             f_slice=f[44:]
-            print("processing file {0}..{1}".format(f_slice, len(aa)-aa.index(i)),"/",len(aa))
+            print("processing file {0}.. Progress: {1}/{2}".format(f_slice,len(aa)-aa.index(i), len(aa)))
 
      
 # =============================================================================
