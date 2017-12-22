@@ -34,20 +34,24 @@ mtp= gpd.read_file(metropo)
 #numbers = list(map(int, s.split()))
 
 
-aa= [int(x) for x in input("list the ID-numbers you want to read and separate each by a comma(,): ").split(',')]
-print("these are the numbers{0}".format(aa))
-type(aa)
+#aa= [int(x) for x in input("list the ID-numbers you want to read and separate each by a comma(,): ").split(',')]
+#print("these are the numbers{0}".format(aa))
+#type(aa)
 
 aa= [int(x) for x in input("list the ID-numbers you want to read and separate each by a comma(,): ").split(',')]
 #[int(x) for x in aa]
 #6016696, 6015141, 5991603, 5991515
 
+#xx="HelsinkiRegion_TravelTimeMatrix2015/6016xxx/travel_times_to_ 6016696.txt"
+#xx[44:]
 nl= z.namelist()
 
 for f in nl:
     for i in aa:
         if str(i) in f:
-            print(f)
+            #slice the string
+            f_slice=f[44:]
+            print("processing file {0}..{1}".format(f_slice, len(aa)-aa.index(i)),"/",len(aa))
 
      
 # =============================================================================
