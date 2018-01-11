@@ -12,17 +12,17 @@ You should upload all your codes into this repository and write a **good documen
  the specified input is not included in the matrices
  specified by use. 
 
- The function has thesame function as the function 'extract_files'. The only difference is that the user is prompted to input the            values which should be separated by comma(,).
+ The function has thesame function as the function 'extract'. The only difference is that the user is prompted to input the            values which should be separated by comma(,).
 
  -  **_zipped_data_path:_** This is the path to the zipped Helsinki travel time matrices data which should be specified.
 
- filepath: output filepath where the matrices files will be extracted to.
+ -  **_filepath:_** output filepath where the matrices files will be extracted to.
 
- sep(e.g ',' ,';', '\t)' : the separator of the columns of the extracted files. This works only if the files are extracted into              thesame folder, i.e separate_folder=False.
+ -  **_sep(e.g ',' ,';', '\t)' :_** the separator of the columns of the extracted files. This works only if the files are extracted into              thesame folder, i.e separate_folder=False.
 
- file_format(e.g. .txt, .csv): format of the extracted travel time matrices. This is also works only if the files are extracted            into thesame folder, i.e separate_folder=False.
+ -   **_file_format(e.g. .txt, .csv):_** format of the extracted travel time matrices. This is also works only if the files are extracted into thesame folder, i.e separate_folder=False.
 
- separate_folder(True/False): this determines if the files should be extracted into same folder or separate folders. Default             value is False.    
+ -  **_separate_folder(True/False):_** this determines if the files should be extracted into same folder or separate folders. Default             value is False.    
 
 
 
@@ -37,36 +37,36 @@ specified by use.
 
 The function has thesame function as the function 'extract_files'. The only difference is that the user is prompted to input the          values which should be separated by comma(,).
 
-zipped_data_path: This is the path to the zipped Helsinki travel time matrices data which should be specified.
+-  **_zipped_data_path:_** This is the path to the zipped Helsinki travel time matrices data which should be specified.
 
-filepath: output filepath where the matrices files will be extracted to.
+-  **_filepath:_** output filepath where the matrices files will be extracted to.
 
-userinput: these are the grid IDs which should be input as a list. e.g, userinput=[542563,625425]
+-  **_userinput:_** these are the grid IDs which should be input as a list. e.g, userinput=[542563,625425]
 
-sep(e.g ',' ,';', '\t)' : the separator of the columns of the extracted files. This works only if the files are extracted into            thesame folder, i.e separate_folder=False.
+-  **_sep(e.g ',' ,';', '\t'):_** the separator of the columns of the extracted files. This works only if the files are extracted into            thesame folder, i.e separate_folder=False.
 
-file_format(e.g. .txt, .csv): format of the extracted travel time matrices. This is also works only if the files are extracted            into thesame folder, i.e separate_folder=False.
+-  **_file_format(e.g. .txt, .csv):_** format of the extracted travel time matrices. This is also works only if the files are extracted            into thesame folder, i.e separate_folder=False.
 
-separate_folder(True/False): this determines if the files should be extracted into same folder or separate folders. Default             value is False.    
+-  **_separate_folder(True/False):_** this determines if the files should be extracted into same folder or separate folders. Default             value is False.    
 
 
-create_shp(zipped_data_path,userinput, grid_shp, filepath, separate_folder=False):
+-      create_shp(zipped_data_path,userinput, grid_shp, filepath, separate_folder=False):
 
-This creates Shapefiles from the chosen Matrix text tables
+_This creates Shapefiles from the chosen Matrix text tables
 (e.g. travel_times_to_5797076.txt) by joining the Matrix file with MetropAccess_YKR_grid 
 Shapefile where from_id in Matrix file corresponds to YKR_ID in the Shapefile. The tool 
 saves the result in the output-folder that user has defined. The output files 
-are named in a way that it is possible to identify the ID from the name (e.g. 5797076).
+are named in a way that it is possible to identify the ID from the name (e.g. 5797076)._
 
-zipped_data_path: This is the path to the zipped Helsinki travel time matrices data which should be specified.
+-  **_zipped_data_path:_** This is the path to the zipped Helsinki travel time matrices data which should be specified.
 
-userinput: these are the grid IDs which should be input as a list. e.g, userinput=[542563,625425]
+-  **_userinput:_** these are the grid IDs which should be input as a list. e.g, userinput=[542563,625425]
 
-grid_shp= this is the grid shapefile of the area which includes the grids IDs and will be joined with the travel time                   matrix(ces).
+-  **_grid_shp:_** this is the grid shapefile of the area which includes the grids IDs and will be joined with the travel time                   matrix(ces).
 
-filepath: output filepath where the matrices files will be extracted to.
+-  **_filepath:_** output filepath where the matrices files will be extracted to.
 
-separate_folder: this determines if the files should be extracted into same folder or separate folders.
+-  **_separate_folder:_** this determines if the files should be extracted into same folder or separate folders.
 
          
          
@@ -81,7 +81,7 @@ separate_folder: this determines if the files should be extracted into same fold
             label_lower_limit="", label_upper_limit="", label_step=""):_
             
             
-This visualises the travel times of selected YKR_IDs based on the travel mode that the 
+_This visualises the travel times of selected YKR_IDs based on the travel mode that the 
 user specifies. It can save those maps into a folder that is specified. The output maps
 can be either static or interactive and user can choose which one with a parameter. 
 By using the parameters, you can freely design yourself the style of the map, 
@@ -91,62 +91,56 @@ option uses pysal classification which can be found here:http://pysal.readthedoc
 With the user_defined classification, you can choose yourself how you wish to make the classifixation,
 inlcuding the lowest limit, uppermost limit and also the interval/break. This can also be done as you want it on the label/legend.
 the uppermost level shows those values that are greater than that level(e.g 60< or >60).
-This function also tells if a grid is empty(i.e no data). This grids with nodata have -1 value
+This function also tells if a grid is empty(i.e no data). This grids with nodata have -1 value_
 
-This creates Shapefiles from the chosen Matrix text tables
-(e.g. travel_times_to_5797076.txt) by joining the Matrix file with MetropAccess_YKR_grid 
-Shapefile where from_id in Matrix file corresponds to YKR_ID in the Shapefile. The tool 
-saves the result in the output-folder that user has defined. The output files 
-are named in a way that it is possible to identify the ID from the name (e.g. 5797076).
+-  **_zipped_data_path:_** This is the path to the zipped Helsinki travel time matrices data which should be specified.
 
-zipped_data_path: This is the path to the zipped Helsinki travel time matrices data which should be specified.
+-  **_userinput:_** these are the grid IDs which should be input as a list. e.g, userinput=[542563,625425]
 
-userinput: these are the grid IDs which should be input as a list. e.g, userinput=[542563,625425]
+-  **_tt_col:_** this is the travel mode which will be displayed in the map(e.g pt_r_tt, pt_r_d, walk_d, car_r_t)
 
-tt_col: this is the travel mode which will be displayed in the map(e.g pt_r_tt, pt_r_d, walk_d, car_r_t)
+-  **_grid_shp:_** this is the grid shapefile of the area which includes the grids IDs and will be joined with the travel time matrix(ces).
 
-grid_shp= this is the grid shapefile of the area which includes the grids IDs and will be joined with the travel time matrix(ces).
+-  **_filepath:_** output filepath where the maps will be extracted to.
 
-filepath: output filepath where the maps will be extracted to.
+-  **_sea(default value=None):_** this is the shapefile of the sea around the region which will be displayed on the map if specified.
 
-sea(default value=None): this is the shapefile of the sea around the region which will be displayed on the map if specified.
+-  **_roads(default value=None):_** this is the shapefile of the roads in the region which will be displayed on the map if specified.
 
-roads(default value=None): this is the shapefile of the roads in the region which will be displayed on the map if specified.
+-  **_train(default value=None):_** this is the shapefile of the train rail line in the region which will be displayed on the map if           specified.
 
-train(default value=None): this is the shapefile of the train rail line in the region which will be displayed on the map if           specified.
+-  **_metro(default value=None):_** this is the shapefile of the metro rail line in the region which will be displayed on the map if             specified.
 
-metro(default value=None): this is the shapefile of the metro rail line in the region which will be displayed on the map if             specified.
+-  **_roads_color, metro_color, train_color:_** these are used to choose the color for the various transportation means.
 
-roads_color, metro_color, train_color: these are used to choose the color for the various transportation means.
+-  **_map_type:_** options are(interactive or static). 
 
-map_type: options are(interactive or static). 
+-  **_destination_style(default= circle):_** options are(grid or cycle). This shows how you wish to highlight the destination grid.
 
-destination_style(default= circle): options are(grid or cycle). This shows how you wish to highlight the destination grid.
+-  **_destination_color:_** color of the highlighted destination.
 
-destination_color: color of the highlighted destination.
+-  **_classification(default='pysal_class'):_** options are('pysal_class' or 'user_defined').
 
-classification(default='pysal_class'): options are('pysal_class' or 'user_defined').
-
-class_type(default="Quantiles"): Options include, 'Quantiles', 'Box_Plot', 'Equal_Interval, 'Fisher_Jenks',
+-  **_class_type(default="Quantiles"):_** Options include, 'Quantiles', 'Box_Plot', 'Equal_Interval, 'Fisher_Jenks',
                               'HeadTail_Breaks','Jenks_Caspall', 'Max_P_Classifier', 'Natural_Breaks', 'Percentiles', and                                             'Std_Mean'.
 
                               For more information:       http://pysal.readthedocs.io/en/latest/library/esda/mapclassify.html#pysal.esda.mapclassify
 
-n_classes(default=8): number of classes.
+-  **_n_classes(default=8):_** number of classes.
 
-multiples: used in Standard Deviation and Mean Map Classification(i.e Std_Mean). 
+-  **_multiples:_** used in Standard Deviation and Mean Map Classification(i.e Std_Mean). 
 
-pct_classes: used in for Percentiles Map Classification. In the pysal documentation, this is parameter is is 'pct'.
+-  **_pct_classes:_** used in for Percentiles Map Classification. In the pysal documentation, this is parameter is is 'pct'.
 
-pct: Fisher Jenks optimal classifier - mean based using random sample. 
+-  **_pct:_** Fisher Jenks optimal classifier - mean based using random sample. 
 
-hinge: used in Box_Plot Map Classification.
+-  **_hinge:_** used in Box_Plot Map Classification.
 
-truncate: used in Fisher Jenks optimal classifier - mean based using random sample. 
+-  **_truncate:_** used in Fisher Jenks optimal classifier - mean based using random sample. 
 
-class_lower_limit, class_upper_limit, class_step: should be used for making the breaks for manually classifying the travel                mode column.                                                
+-  **_class_lower_limit, class_upper_limit, class_step:_** should be used for making the breaks for manually classifying the travel                mode column.                                                
 
-label_lower_limit, label_upper_limit, label_step: This can be used for making the legend.
+-  **_label_lower_limit, label_upper_limit, label_step:_** This can be used for making the legend.
 label_lower_limit is the lowest limit allowed in the legen, label_step is the label/legend class interval, while
 the label_upper_limit level shows those values that are greater than that level(e.g 60< or >60)
 
@@ -161,7 +155,7 @@ the label_upper_limit level shows those values that are greater than that level(
         class_upper_limit="", class_step="", label_lower_limit="", label_upper_limit="", 
         label_step="")_
         
-The function compares travel times or travel distances between two different travel modes 
+_The function compares travel times or travel distances between two different travel modes 
 (more than two travel modes are not allowed). Thus IF the user has specified two travel modes '
 (passed in as a list), the tool will calculate the time/distance difference 
 of those travel modes into a new data column that should be created in the Shapefile. The logic 
@@ -174,9 +168,9 @@ If the user has not specified any travel modes, the tool only creates the Shapef
 execute any calculations and also states this. It is only possible to compare two travel modes between each 
 other at the time. Accepted travel modes are the same ones that are found in the actual 
 TravelTimeMatrix file (pt_r_tt, car_t, etc.). If something else is specified, AccessViz error is raised and 
-the function suggests the acceptable values.
+the function suggests the acceptable values._
 
-The output maps are saved into a folder that is specified. The output maps
+_The output maps are saved into a folder that is specified. The output maps
 can be either static or interactive and user can choose which one with a parameter. 
 By using the parameters, you can freely design yourself the style of the map, 
 travel time intervals (classes) etc.  You can decided to either visualise joined travel mode or not.
@@ -185,68 +179,62 @@ option uses pysal classification which can be found here:http://pysal.readthedoc
 With the user_defined classification, you can choose yourself how you wish to make the classifixation,
 inlcuding the lowest limit, uppermost limit and also the interval/break. This can also be done as you want it on the label/legend.
 the uppermost level shows those values that are greater than that level(e.g 60< or >60).
-This function also tells if a grid is empty(i.e no data). This grids with nodata have -1 value
+This function also tells if a grid is empty(i.e no data). This grids with nodata have -1 value_
 
-This creates Shapefiles from the chosen Matrix text tables
-(e.g. travel_times_to_5797076.txt) by joining the Matrix file with MetropAccess_YKR_grid 
-Shapefile where from_id in Matrix file corresponds to YKR_ID in the Shapefile. The tool 
-saves the result in the output-folder that user has defined. The output files 
-are named in a way that it is possible to identify the ID from the name (e.g. 5797076).
 
-zipped_data_path: This is the path to the zipped Helsinki travel time matrices data which should be specified.
+
+-  **_zipped_data_path:_** This is the path to the zipped Helsinki travel time matrices data which should be specified.
 
 userinput: these are the grid IDs which should be input as a list. e.g, userinput=[542563,625425].
 
-compare_mod: a list of the travel modes to be compared e.g(['pt_r_tt', 'car_r_t']). 
+-  **_compare_mod:_** a list of the travel modes to be compared e.g(['pt_r_tt', 'car_r_t']). 
 
-create_shapefiles(default=True): this is used to specify if the shapefiles of the joined metropo_Acees grid
+-  **_create_shapefiles(default=True):_** this is used to specify if the shapefiles of the joined metropo_Acees grid
 and the travel time matrices should be created. if True, the compared mode(i.e travelmode1 - travelmode2) will be included in the calculation.
 
-visualisation(default=True): used to specify if you want to visualise the compared travel mode.
+-  **visualisation(default=True):_** used to specify if you want to visualise the compared travel mode.
 
-grid_shp= this is the grid shapefile of the area which includes the grids IDs and will be joined with the travel time matrix(ces).
+-  **_grid_shp:_** this is the grid shapefile of the area which includes the grids IDs and will be joined with the travel time matrix(ces).
 
-filepath: output filepath where the maps will be extracted to.
+-  **_filepath:_** output filepath where the maps will be extracted to.
 
-sea(default value=None): this is the shapefile of the sea around the region which will be displayed on the map if specified.
+-  **_sea(default value=None):_** this is the shapefile of the sea around the region which will be displayed on the map if specified.
 
-roads(default value=None): this is the shapefile of the roads in the region which will be displayed on the map if specified.
+-  **_roads(default value=None):_** this is the shapefile of the roads in the region which will be displayed on the map if specified.
 
-train(default value=None): this is the shapefile of the train rail line in the region which will be displayed on the map if specified.
+-  **_train(default value=None):_** this is the shapefile of the train rail line in the region which will be displayed on the map if           specified.
 
-metro(default value=None): this is the shapefile of the metro rail line in the region which will be displayed on the map if specified.
+-  **_metro(default value=None):_** this is the shapefile of the metro rail line in the region which will be displayed on the map if             specified.
 
-roads_color, metro_color, train_color: these are used to choose the color for the various transportation means.
+-  **_roads_color, metro_color, train_color:_** these are used to choose the color for the various transportation means.
 
-map_type: options are(interactive or static). 
+-  **_map_type:_** options are(interactive or static). 
 
-destination_style(default= circle): options are(grid or cycle). This shows how you wish to highlight the destination grid.
+-  **_destination_style(default= circle):_** options are(grid or cycle). This shows how you wish to highlight the destination grid.
 
-destination_color: color of the highlighted destination.
+-  **_destination_color:_** color of the highlighted destination.
 
-classification(default='pysal_class'): options are('pysal_class' or 'user_defined').
+-  **_classification(default='pysal_class'):_** options are('pysal_class' or 'user_defined').
 
-class_type(default="Quantiles"): Options include, 'Quantiles', 'Box_Plot', 'Equal_Interval, 'Fisher_Jenks',
-                              'HeadTail_Breaks','Jenks_Caspall', 'Max_P_Classifier', 'Natural_Breaks', 'Percentiles', and 'Std_Mean'.
-                              For more information: http://pysal.readthedocs.io/en/latest/library/esda/mapclassify.html#pysal.esda.mapclassify
+-  **_class_type(default="Quantiles"):_** Options include, 'Quantiles', 'Box_Plot', 'Equal_Interval, 'Fisher_Jenks',
+                              'HeadTail_Breaks','Jenks_Caspall', 'Max_P_Classifier', 'Natural_Breaks', 'Percentiles', and                                             'Std_Mean'.
+For more information: You can check the [pysal page](http://pysal.readthedocs.io/en/latest/library/esda/mapclassify.html#pysal.esda.mapclassify)
 
-n_classes(default=8): number of classes.
+-  **_n_classes(default=8):_** number of classes.
 
-multiples: used in Standard Deviation and Mean Map Classification(i.e Std_Mean). 
+-  **_multiples:_** used in Standard Deviation and Mean Map Classification(i.e Std_Mean). 
 
-pct_classes: used in for Percentiles Map Classification. In the pysal documentation, this is parameter is is 'pct'.
+-  **_pct_classes:_** used in for Percentiles Map Classification. In the pysal documentation, this is parameter is is 'pct'.
 
-pct: Fisher Jenks optimal classifier - mean based using random sample. 
+-  **_pct:_** Fisher Jenks optimal classifier - mean based using random sample. 
 
-hinge: used in Box_Plot Map Classification.
+-  **_hinge:_** used in Box_Plot Map Classification.
 
-truncate: used in Fisher Jenks optimal classifier - mean based using random sample. 
+-  **_truncate:_** used in Fisher Jenks optimal classifier - mean based using random sample. 
 
-class_lower_limit, class_upper_limit, class_step: should be used for making the breaks for manually classifying the travel mode column.
+-  **_class_lower_limit, class_upper_limit, class_step:_** should be used for making the breaks for manually classifying the travel                mode column.                                                
 
-
-label_lower_limit, label_upper_limit, label_step: This can be used for making the legend.
+-  **_label_lower_limit, label_upper_limit, label_step:_** This can be used for making the legend.
 label_lower_limit is the lowest limit allowed in the legen, label_step is the label/legend class interval, while
 the label_upper_limit level shows those values that are greater than that level(e.g 60< or >60)
-
 
