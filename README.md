@@ -5,6 +5,22 @@ Read the final assignment instructions from the [https://autogis.github.io](http
 You should upload all your codes into this repository and write a **good documentation** how everything works.
 
 **AccessViz**
+AccessViz module can be imported as below:
+
+from AccessViz import explore
+
+Different functions in the AccessViz module include: extract_prompt, extract, create_shp, show_travel_mode and compare_travel_modes. See below for the documentation.
+
+This [source code can be found here](https://github.com/AutoGIS-2017/final-assignment-Oyelowo/blob/master/AccessViz/AccessViz.py).
+It is also important to use the module get_geom which AccessViz depends on in some parts. The source code of this can be found [here](https://github.com/AutoGIS-2017/final-assignment-Oyelowo/blob/master/AccessViz/get_geom.py).
+
+NOTE: for the travel time matrices, the file path of the zipped file should be specified while for the MetropoAcess grid, the shapefile can be loaded with the geopandas module.  
+
+**LINKS TO THE VARIOUS DATA USED/NEEDED:**
+-  Travel time matrices and metropo Access grid shapefile: http://blogs.helsinki.fi/accessibility/helsinki-region-travel-time-matrix-2015/
+
+-  
+
 -      extract_prompt(zipped_data_path, filepath, sep=";", file_format=".txt",separate_folders=False):
        
  This function extracts matrices(files) from the zipped Helsinki Region Travel
@@ -23,6 +39,9 @@ You should upload all your codes into this repository and write a **good documen
  -   **_file_format(e.g. .txt, .csv):_** format of the extracted travel time matrices. This is also works only if the files are extracted into thesame folder, i.e separate_folder=False.
 
  -  **_separate_folder(True/False):_** this determines if the files should be extracted into same folder or separate folders. Default             value is False.    
+
+       **EXAMPLE OF USAGE:**
+       explore.extract_prompt(zipped_data_path= "C:/Users/oyedayo/HelsinkiRegion_TravelTimeMatrix2015.zip", separate_folders=False, filepath= "C:/Users/oyedayo/matrices", sep=",", file_format='.txt')
 
 
 
@@ -49,6 +68,10 @@ _The function has thesame function as the function 'extract_files'. The only dif
 
 -  **_separate_folder(True/False):_** this determines if the files should be extracted into same folder or separate folders. Default             value is False.    
 
+**EXAMPLE OF USAGE:**
+explore.extract(zipped_data_path= "C:/Users/oyedayo/HelsinkiRegion_TravelTimeMatrix2015.zip", userinput=[6016696, 6015141, 5991603 ],separate_folders=True separate_folders=False, filepath= "C:/Users/oyedayo/matrices", sep=",", file_format='.txt')
+
+
 
 -      create_shp(zipped_data_path,userinput, grid_shp, filepath, separate_folder=False):
 
@@ -67,8 +90,10 @@ are named in a way that it is possible to identify the ID from the name (e.g. 57
 -  **_filepath:_** output filepath where the matrices files will be extracted to.
 
 -  **_separate_folder:_** this determines if the files should be extracted into same folder or separate folders.
+       
+      **EXAMPLE OF USAGE:**
+      explore.create_shp(zipped_data_path="C:/Users/oyedayo/HelsinkiRegion_TravelTimeMatrix2015.zip", separate_folder=False, userinput=[6016696, 6015141, 5991603 ], grid_shp= shape_file_of_the_MetropAccess_YKR_grid, filepath= r"C:\Users\oyeda\Desktop\AUTOGIS\FINAL_ASSIGNMENT\merged")
 
-         
          
          
  -     show_travel_mode(zipped_data_path,userinput, tt_col, filepath, grid_shp, sea=None, roads=None,train=None, 
@@ -122,7 +147,7 @@ This function also tells if a grid is empty(i.e no data). This grids with nodata
 -  **_classification(default='pysal_class'):_** options are('pysal_class' or 'user_defined').
 
 -  **_class_type(default="Quantiles"):_** Options include, 'Quantiles', 'Box_Plot', 'Equal_Interval, 'Fisher_Jenks',
-                              'HeadTail_Breaks','Jenks_Caspall', 'Max_P_Classifier', 'Natural_Breaks', 'Percentiles', and                                             'Std_Mean'.  You can fund more information on the [pysal page](http://pysal.readthedocs.io/en/latest/library/esda/mapclassify.html#pysal.esda.mapclassify)
+                              'HeadTail_Breaks','Jenks_Caspall', 'Max_P_Classifier', 'Natural_Breaks', 'Percentiles', and                                             'Std_Mean'.  You can fund more information on the [pysal page](http://pysal.readthedocs.io/en/latest/library/esda/mapclassify.html#pysal.esda.mapclassify).
 
 -  **_n_classes(default=8):_** number of classes.
 
@@ -141,6 +166,13 @@ This function also tells if a grid is empty(i.e no data). This grids with nodata
 -  **_label_lower_limit, label_upper_limit, label_step:_** This can be used for making the legend.
 label_lower_limit is the lowest limit allowed in the legen, label_step is the label/legend class interval, while
 the label_upper_limit level shows those values that are greater than that level(e.g 60< or >60)
+
+  **EXAMPLE OF USAGE:**
+  explore.show_travel_mode(zipped_data_path="C:/Users/oyedayo/HelsinkiRegion_TravelTimeMatrix2015.zip", train=train_shapefile,                      metro=metroline_shapefile, roads=roads_shapefile,
+           roads_color='grey', metro_color='red', train_color='blue',userinput=[6015141, 5991603, 5991515], 
+           destination_style='circle', destination_color='blue',map_type='interactive',
+           grid_shp=mtp, tt_col="car_r_t", n_classes=5, classification='pysal_class',  
+           class_type='Equal_Interval', filepath=r"C:\Users\oyeda\Desktop\AUTOGIS\FINAL_ASSIGNMENT\visualise") 
 
 
 
@@ -173,7 +205,7 @@ can be either static or interactive and user can choose which one with a paramet
 By using the parameters, you can freely design yourself the style of the map, 
 travel time intervals (classes) etc.  You can decided to either visualise joined travel mode or not.
 You can also choose what kind of classificaation(either pysal class or User_Defined). The pysal_class
-option uses pysal classification which can be found here:http://pysal.readthedocs.io/en/latest/library/esda/mapclassify.html#pysal.esda.mapclassify.
+option uses pysal classification which can be found on the [pysal page](http://pysal.readthedocs.io/en/latest/library/esda/mapclassify.html#pysal.esda.mapclassify).
 With the user_defined classification, you can choose yourself how you wish to make the classifixation,
 inlcuding the lowest limit, uppermost limit and also the interval/break. This can also be done as you want it on the label/legend.
 the uppermost level shows those values that are greater than that level(e.g 60< or >60).
@@ -216,7 +248,7 @@ and the travel time matrices should be created. if True, the compared mode(i.e t
 
 -  **_class_type(default="Quantiles"):_** Options include, 'Quantiles', 'Box_Plot', 'Equal_Interval, 'Fisher_Jenks',
                               'HeadTail_Breaks','Jenks_Caspall', 'Max_P_Classifier', 'Natural_Breaks', 'Percentiles', and                                             'Std_Mean'.
-For more information: You can check the [pysal page](http://pysal.readthedocs.io/en/latest/library/esda/mapclassify.html#pysal.esda.mapclassify)
+For more information: You can check the [pysal page](http://pysal.readthedocs.io/en/latest/library/esda/mapclassify.html#pysal.esda.mapclassify).
 
 -  **_n_classes(default=8):_** number of classes.
 
@@ -234,5 +266,13 @@ For more information: You can check the [pysal page](http://pysal.readthedocs.io
 
 -  **_label_lower_limit, label_upper_limit, label_step:_** This can be used for making the legend.
 label_lower_limit is the lowest limit allowed in the legen, label_step is the label/legend class interval, while
-the label_upper_limit level shows those values that are greater than that level(e.g 60< or >60)
+the label_upper_limit level shows those values that are greater than that level(e.g 60< or >60).
+
+
+  **EXAMPLE OF USAGE:**
+  explore.compare_travel_modes(zipped_data_path="C:/Users/oyedayo/HelsinkiRegion_TravelTimeMatrix2015.zip", train=train_shapefile,                      metro=metroline_shapefile, roads=roads_shapefile, compare_mod=["pt_r_tt", "car_r_t"], create_shapefiles=True,                          visualisation=True
+           roads_color='grey', metro_color='red', train_color='blue', userinput=[6015141, 5991603, 5991515], 
+           destination_style='circle', destination_color='blue',map_type='interactive',
+           grid_shp=mtp, tt_col="car_r_t",n_classes=5, classification='pysal_class',  
+           class_type='Equal_Interval' , filepath=r"C:\Users\oyeda\Desktop\AUTOGIS\FINAL_ASSIGNMENT\visualise") 
 
