@@ -245,7 +245,7 @@ class explore:
         
     def extract2(zipped_data_path, userinput, filepath, sep=";", file_format=".txt", separate_folders=False):
         """
-         The function has thesame function as the function 'extract_prompt'. The only difference is that the user is prompted to input the values which should be separated by comma(,).
+         The function has thesame function as the function 'extract'. The only difference is in the solution used for the tool.
         This function extracts matrices(files) from the zipped Helsinki Region Travel
         Time Matrix, according to the specified userinputs(matrix ID) which is the grid YKR_ID. It also states if
         the specified input is not included in the matrices
@@ -337,7 +337,7 @@ class explore:
         the specified input is not included in the matrices
         specified by use. 
         
-        The function has thesame function as the function 'extract_files'. The only difference is that the user is prompted to input the values which should be separated by comma(,).
+        The function has thesame function as the function 'extract_promt'. The only difference is in the solution used for the function.
         
         zipped_data_path: This is the path to the zipped Helsinki travel time matrices data which should be specified.
         
