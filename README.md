@@ -4,7 +4,8 @@ Read the final assignment instructions from the [https://autogis.github.io](http
 
 You should upload all your codes into this repository and write a **good documentation** how everything works.
 
-**AccessViz**
+  [**AccessViz**]
+  
 AccessViz module can be imported as below:
 
 from AccessViz import explore
@@ -26,7 +27,7 @@ NOTE: for the travel time matrices, the file path of the zipped file should be s
  _This function extracts matrices(files) from the zipped Helsinki Region Travel
  Time Matrix, according to the specified userinputs(matrix ID) which is the grid YKR_ID. It also states if
  the specified input is not included in the matrices
- specified by use. _
+ specified by use._
  
  _The function has the same function as the function 'extract'. The only difference is that the user is prompted to input the            values which should be separated by comma(,)._
 
@@ -41,7 +42,7 @@ NOTE: for the travel time matrices, the file path of the zipped file should be s
  -  **_separate_folder(True/False):_** this determines if the files should be extracted into same folder or separate folders. Default             value is False.    
 
        **EXAMPLE OF USAGE:**
-       explore.extract_prompt(zipped_data_path= "C:/Users/oyedayo/HelsinkiRegion_TravelTimeMatrix2015.zip", separate_folders=False, filepath= "C:/Users/oyedayo/matrices", sep=",", file_format='.txt')
+       **_explore.extract_prompt(zipped_data_path= "C:/Users/oyedayo/HelsinkiRegion_TravelTimeMatrix2015.zip", separate_folders=False, filepath= "C:/Users/oyedayo/matrices", sep=",", file_format='.txt')_**
 
 
 
@@ -52,7 +53,7 @@ _The function has thesame function as the function 'extract_prompt'. The only di
 This function extracts matrices(files) from the zipped Helsinki Region Travel
 Time Matrix, according to the specified userinputs(matrix ID) which is the grid YKR_ID. It also states if
 the specified input is not included in the matrices
-specified by use. _
+specified by use._
 
 _The function has thesame function as the function 'extract_files'. The only difference is that the user is prompted to input the          values which should be separated by comma(,)._
 
