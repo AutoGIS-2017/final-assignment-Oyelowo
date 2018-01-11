@@ -2,11 +2,10 @@
 
 Read the final assignment instructions from the [https://autogis.github.io](https://automating-gis-processes.github.io/2017/lessons/FA/final-assignment.html).
 
-You should upload all your codes into this repository and write a **good documentation** how everything works.
 
-  [**AccessViz**]
+  **AccessViz**.
   
-AccessViz module can be imported as below:
+AccessViz module can be used to explore the Heslinki travel time matrices to analyse and visualise the Accessibility of various places in the area by different modes of transportation. More information can be found on the [Accessibility group page](http://blogs.helsinki.fi/accessibility/helsinki-region-travel-time-matrix-2015/). The module can be imported as below:
 
 from AccessViz import explore
 
@@ -18,7 +17,23 @@ It is also important to use the module get_geom which AccessViz depends on in so
 NOTE: for the travel time matrices, the file path of the zipped file should be specified while for the MetropoAcess grid, the shapefile can be loaded with the geopandas module.  
 
 **LINKS TO THE VARIOUS DATA USED/NEEDED:**
--  Travel time matrices and metropo Access grid shapefile: http://blogs.helsinki.fi/accessibility/helsinki-region-travel-time-matrix-2015/
+-  Travel time matrices and metropo Access grid shapefile: http://blogs.helsinki.fi/accessibility/helsinki-region-travel-time-matrix-2015/. Various attributes(including the travel modes) in the travel time matrices are:
+
+
+from_id:	ID number of the origin grid cell
+to_id:	ID number of the destination grid cell
+walk_t:	Travel time in minutes from origin to destination by walking
+walk_d:	Distance in meters of the walking route
+pt_r_tt:	Travel time in minutes from origin to destination by public transportation in rush hour traffic; whole travel chain has been taken into acount including the waiting time at home
+pt_r_t:	Travel time in minutes from origin to destination by public transportation in rush hour traffic; whole travel chain has been taken into account excluding the waiting time at home
+pt_r_d:	Distance in meters of the public transportation route in rush hour traffic
+pt_m_tt:	Travel time in minutes from origin to destination by public transportation in midday traffic; whole travel chain has been taken into acount including the waiting time at home
+pt_m_t:	Travel time in minutes from origin to destination by public transportation in midday traffic; whole travel chain has been taken into account excluding the waiting time at home
+pt_m_d:	Distance in meters of the public transportation route in midday traffic
+car_r_t: 	Travel time in minutes from origin to destination by private car in rush hour traffic; the whole travel chain has been taken into account (see “Methods” section below)
+car_r_d:	Distance in meters of the private car route in rush hour traffic
+car_m_t:	Travel time in minutes from origin to destination by private car in midday traffic; the whole travel chain has been taken into account (see “Methods” section below)
+car_m_d:	Distance in meters of the private car route in midday traffic
 
 -  shapefiles for the Sea, metro rail line, roads can train rail line(Railway) can be found in my [repository](https://github.com/AutoGIS-2017/final-assignment-Oyelowo/tree/master/data)
 
@@ -93,6 +108,7 @@ are named in a way that it is possible to identify the ID from the name (e.g. 57
 -  **_separate_folder:_** this determines if the files should be extracted into same folder or separate folders.
        
       **EXAMPLE OF USAGE:**
+      
       **_explore.create_shp(zipped_data_path="C:/Users/oyedayo/HelsinkiRegion_TravelTimeMatrix2015.zip", separate_folder=False, userinput=[6016696, 6015141, 5991603 ], grid_shp= shape_file_of_the_MetropAccess_YKR_grid, filepath= r"C:\Users\oyeda\Desktop\AUTOGIS\FINAL_ASSIGNMENT\merged")_**
 
          
