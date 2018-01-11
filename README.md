@@ -5,7 +5,7 @@ Read the final assignment instructions from the [https://autogis.github.io](http
 
   **AccessViz**.
   
-  ![Text shown if image does not load](AccessViz/YKR_grid_values.html)
+  ![Text shown if image does not load](https://autogis-2017.github.io/final-assignment-Oyelowo/AccessViz/YKR_grid_values.html)
   **_You can select a desired grid ID from interactive map above_**
   
 AccessViz module can be used to explore the Heslinki travel time matrices to analyse and visualise the Accessibility of various places in the area by different modes of transportation. More information can be found on the [Accessibility group page](http://blogs.helsinki.fi/accessibility/helsinki-region-travel-time-matrix-2015/). The module can be imported as below:
