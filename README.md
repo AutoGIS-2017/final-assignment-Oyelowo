@@ -5,7 +5,7 @@ Read the final assignment instructions from the [https://autogis.github.io](http
 You should upload all your codes into this repository and write a **good documentation** how everything works.
 
 **AccessViz**
--      _extract_prompt(zipped_data_path, filepath, sep=";", file_format=".txt",separate_folders=False):_
+-1      extract_prompt(zipped_data_path, filepath, sep=";", file_format=".txt",separate_folders=False):
        
  This function extracts matrices(files) from the zipped Helsinki Region Travel
  Time Matrix, according to the specified userinputs(matrix ID) which is the grid YKR_ID. It also states if
@@ -27,15 +27,15 @@ You should upload all your codes into this repository and write a **good documen
 
 
 
--      _extract(zipped_data_path, filepath,userinput, sep=";", file_format=".txt", separate_folders=False):_
+-2      extract(zipped_data_path, filepath,userinput, sep=";", file_format=".txt", separate_folders=False):
 
-The function has thesame function as the function 'extract_prompt'. The only difference is that the user is prompted to input           the values which should be separated by comma(,).
+_The function has thesame function as the function 'extract_prompt'. The only difference is that the user is prompted to input           the values which should be separated by comma(,).
 This function extracts matrices(files) from the zipped Helsinki Region Travel
 Time Matrix, according to the specified userinputs(matrix ID) which is the grid YKR_ID. It also states if
 the specified input is not included in the matrices
-specified by use. 
+specified by use. _
 
-The function has thesame function as the function 'extract_files'. The only difference is that the user is prompted to input the          values which should be separated by comma(,).
+_The function has thesame function as the function 'extract_files'. The only difference is that the user is prompted to input the          values which should be separated by comma(,)._
 
 -  **_zipped_data_path:_** This is the path to the zipped Helsinki travel time matrices data which should be specified.
 
@@ -50,7 +50,7 @@ The function has thesame function as the function 'extract_files'. The only diff
 -  **_separate_folder(True/False):_** this determines if the files should be extracted into same folder or separate folders. Default             value is False.    
 
 
--      create_shp(zipped_data_path,userinput, grid_shp, filepath, separate_folder=False):
+-3      create_shp(zipped_data_path,userinput, grid_shp, filepath, separate_folder=False):
 
 _This creates Shapefiles from the chosen Matrix text tables
 (e.g. travel_times_to_5797076.txt) by joining the Matrix file with MetropAccess_YKR_grid 
@@ -71,14 +71,14 @@ are named in a way that it is possible to identify the ID from the name (e.g. 57
          
          
          
- -     _show_travel_mode(zipped_data_path,userinput, tt_col, filepath, grid_shp, sea=None, roads=None,train=None, 
+ -4     show_travel_mode(zipped_data_path,userinput, tt_col, filepath, grid_shp, sea=None, roads=None,train=None, 
             metro=None, roads_color='grey', metro_color='red', 
             train_color='blue',map_type='interactive', destination_style='circle', destination_color='blue',       
             classification='pysal_class', class_type="Quantiles", n_classes=8,
             multiples=[-2, -1, 1, 2],  pct=0.1, hinge=1.5, truncate=True, 
             pct_classes=[1,10,50,90,99,100],
             class_lower_limit="", class_upper_limit="", class_step="", 
-            label_lower_limit="", label_upper_limit="", label_step=""):_
+            label_lower_limit="", label_upper_limit="", label_step=""):
             
             
 _This visualises the travel times of selected YKR_IDs based on the travel mode that the 
@@ -87,7 +87,7 @@ can be either static or interactive and user can choose which one with a paramet
 By using the parameters, you can freely design yourself the style of the map, 
 travel time intervals (classes) etc.  You can decided to either visualise joined travel mode or not.
 You can also choose what kind of classificaation(either pysal class or User_Defined). The pysal_class
-option uses pysal classification which can be found here:http://pysal.readthedocs.io/en/latest/library/esda/mapclassify.html#pysal.esda.mapclassify.
+option uses pysal classification which can be found on the [pysal page](http://pysal.readthedocs.io/en/latest/library/esda/mapclassify.html#pysal.esda.mapclassify).
 With the user_defined classification, you can choose yourself how you wish to make the classifixation,
 inlcuding the lowest limit, uppermost limit and also the interval/break. This can also be done as you want it on the label/legend.
 the uppermost level shows those values that are greater than that level(e.g 60< or >60).
@@ -122,9 +122,7 @@ This function also tells if a grid is empty(i.e no data). This grids with nodata
 -  **_classification(default='pysal_class'):_** options are('pysal_class' or 'user_defined').
 
 -  **_class_type(default="Quantiles"):_** Options include, 'Quantiles', 'Box_Plot', 'Equal_Interval, 'Fisher_Jenks',
-                              'HeadTail_Breaks','Jenks_Caspall', 'Max_P_Classifier', 'Natural_Breaks', 'Percentiles', and                                             'Std_Mean'.
-
-                              For more information:       http://pysal.readthedocs.io/en/latest/library/esda/mapclassify.html#pysal.esda.mapclassify
+                              'HeadTail_Breaks','Jenks_Caspall', 'Max_P_Classifier', 'Natural_Breaks', 'Percentiles', and                                             'Std_Mean'.  You can fund more information on the [pysal page](http://pysal.readthedocs.io/en/latest/library/esda/mapclassify.html#pysal.esda.mapclassify)
 
 -  **_n_classes(default=8):_** number of classes.
 
@@ -146,14 +144,14 @@ the label_upper_limit level shows those values that are greater than that level(
 
 
 
--      _compare_travel_modes(zipped_data_path,userinput, filepath, grid_shp, sea=None, roads=None,
+-5      compare_travel_modes(zipped_data_path,userinput, filepath, grid_shp, sea=None, roads=None,
         train=None, metro=None,compare_mod=[], create_shapefiles=True, visualisation=True, 
         map_type='interactive', destination_style='circle', destination_color='blue',
         roads_color='grey', metro_color='red', train_color='yellow',classification='pysal_class', 
         class_type="Quantiles", n_classes=8, multiples=[-2, -1, 1, 2],  pct=0.1, hinge=1.5, 
         truncate=True, pct_classes=[1,10,50,90,99,100], class_lower_limit="", 
         class_upper_limit="", class_step="", label_lower_limit="", label_upper_limit="", 
-        label_step="")_
+        label_step="")
         
 _The function compares travel times or travel distances between two different travel modes 
 (more than two travel modes are not allowed). Thus IF the user has specified two travel modes '
