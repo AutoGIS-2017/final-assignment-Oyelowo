@@ -19,16 +19,16 @@ NOTE: for the travel time matrices, the file path of the zipped file should be s
 **LINKS TO THE VARIOUS DATA USED/NEEDED:**
 -  Travel time matrices and metropo Access grid shapefile: http://blogs.helsinki.fi/accessibility/helsinki-region-travel-time-matrix-2015/
 
--  
+-  shapefiles for the Sea, metro rail line, roads can train rail line(Railway) can be found in my [repository](https://github.com/AutoGIS-2017/final-assignment-Oyelowo/tree/master/data)
 
 -      extract_prompt(zipped_data_path, filepath, sep=";", file_format=".txt",separate_folders=False):
        
- This function extracts matrices(files) from the zipped Helsinki Region Travel
+ _This function extracts matrices(files) from the zipped Helsinki Region Travel
  Time Matrix, according to the specified userinputs(matrix ID) which is the grid YKR_ID. It also states if
  the specified input is not included in the matrices
- specified by use. 
-
- The function has thesame function as the function 'extract'. The only difference is that the user is prompted to input the            values which should be separated by comma(,).
+ specified by use. _
+ 
+ _The function has the same function as the function 'extract'. The only difference is that the user is prompted to input the            values which should be separated by comma(,)._
 
  -  **_zipped_data_path:_** This is the path to the zipped Helsinki travel time matrices data which should be specified.
 
@@ -69,7 +69,7 @@ _The function has thesame function as the function 'extract_files'. The only dif
 -  **_separate_folder(True/False):_** this determines if the files should be extracted into same folder or separate folders. Default             value is False.    
 
 **EXAMPLE OF USAGE:**
-explore.extract(zipped_data_path= "C:/Users/oyedayo/HelsinkiRegion_TravelTimeMatrix2015.zip", userinput=[6016696, 6015141, 5991603 ],separate_folders=True separate_folders=False, filepath= "C:/Users/oyedayo/matrices", sep=",", file_format='.txt')
+**_explore.extract(zipped_data_path= "C:/Users/oyedayo/HelsinkiRegion_TravelTimeMatrix2015.zip", userinput=[6016696, 6015141, 5991603 ],separate_folders=True separate_folders=False, filepath= "C:/Users/oyedayo/matrices", sep=",", file_format='.txt')_**
 
 
 
@@ -92,7 +92,7 @@ are named in a way that it is possible to identify the ID from the name (e.g. 57
 -  **_separate_folder:_** this determines if the files should be extracted into same folder or separate folders.
        
       **EXAMPLE OF USAGE:**
-      explore.create_shp(zipped_data_path="C:/Users/oyedayo/HelsinkiRegion_TravelTimeMatrix2015.zip", separate_folder=False, userinput=[6016696, 6015141, 5991603 ], grid_shp= shape_file_of_the_MetropAccess_YKR_grid, filepath= r"C:\Users\oyeda\Desktop\AUTOGIS\FINAL_ASSIGNMENT\merged")
+      **_explore.create_shp(zipped_data_path="C:/Users/oyedayo/HelsinkiRegion_TravelTimeMatrix2015.zip", separate_folder=False, userinput=[6016696, 6015141, 5991603 ], grid_shp= shape_file_of_the_MetropAccess_YKR_grid, filepath= r"C:\Users\oyeda\Desktop\AUTOGIS\FINAL_ASSIGNMENT\merged")_**
 
          
          
@@ -168,11 +168,11 @@ label_lower_limit is the lowest limit allowed in the legen, label_step is the la
 the label_upper_limit level shows those values that are greater than that level(e.g 60< or >60)
 
   **EXAMPLE OF USAGE:**
-  explore.show_travel_mode(zipped_data_path="C:/Users/oyedayo/HelsinkiRegion_TravelTimeMatrix2015.zip", train=train_shapefile,                      metro=metroline_shapefile, roads=roads_shapefile,
+  **_explore.show_travel_mode(zipped_data_path="C:/Users/oyedayo/HelsinkiRegion_TravelTimeMatrix2015.zip", train=train_shapefile,                      metro=metroline_shapefile, roads=roads_shapefile,
            roads_color='grey', metro_color='red', train_color='blue',userinput=[6015141, 5991603, 5991515], 
            destination_style='circle', destination_color='blue',map_type='interactive',
            grid_shp=mtp, tt_col="car_r_t", n_classes=5, classification='pysal_class',  
-           class_type='Equal_Interval', filepath=r"C:\Users\oyeda\Desktop\AUTOGIS\FINAL_ASSIGNMENT\visualise") 
+           class_type='Equal_Interval', filepath=r"C:\Users\oyeda\Desktop\AUTOGIS\FINAL_ASSIGNMENT\visualise")_**
 
 
 
@@ -270,9 +270,8 @@ the label_upper_limit level shows those values that are greater than that level(
 
 
   **EXAMPLE OF USAGE:**
-  explore.compare_travel_modes(zipped_data_path="C:/Users/oyedayo/HelsinkiRegion_TravelTimeMatrix2015.zip", train=train_shapefile,                      metro=metroline_shapefile, roads=roads_shapefile, compare_mod=["pt_r_tt", "car_r_t"], create_shapefiles=True,                          visualisation=True
-           roads_color='grey', metro_color='red', train_color='blue', userinput=[6015141, 5991603, 5991515], 
+  **_explore.compare_travel_modes(zipped_data_path="C:/Users/oyedayo/HelsinkiRegion_TravelTimeMatrix2015.zip", train=train_shapefile,                      metro=metroline_shapefile, roads=roads_shapefile, compare_mod=["pt_r_tt", "car_r_t"], create_shapefiles=True,                          visualisation=True, roads_color='grey', metro_color='red', train_color='blue', userinput=[6015141, 5991603, 5991515], 
            destination_style='circle', destination_color='blue',map_type='interactive',
            grid_shp=mtp, tt_col="car_r_t",n_classes=5, classification='pysal_class',  
-           class_type='Equal_Interval' , filepath=r"C:\Users\oyeda\Desktop\AUTOGIS\FINAL_ASSIGNMENT\visualise") 
+           class_type='Equal_Interval' , filepath=r"C:\Users\oyeda\Desktop\AUTOGIS\FINAL_ASSIGNMENT\visualise") _**
 
