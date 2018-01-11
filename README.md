@@ -5,7 +5,7 @@ Read the final assignment instructions from the [https://autogis.github.io](http
 You should upload all your codes into this repository and write a **good documentation** how everything works.
 
 **AccessViz**
--1      extract_prompt(zipped_data_path, filepath, sep=";", file_format=".txt",separate_folders=False):
+-      extract_prompt(zipped_data_path, filepath, sep=";", file_format=".txt",separate_folders=False):
        
  This function extracts matrices(files) from the zipped Helsinki Region Travel
  Time Matrix, according to the specified userinputs(matrix ID) which is the grid YKR_ID. It also states if
@@ -27,7 +27,7 @@ You should upload all your codes into this repository and write a **good documen
 
 
 
--2      extract(zipped_data_path, filepath,userinput, sep=";", file_format=".txt", separate_folders=False):
+-      extract(zipped_data_path, filepath,userinput, sep=";", file_format=".txt", separate_folders=False):
 
 _The function has thesame function as the function 'extract_prompt'. The only difference is that the user is prompted to input           the values which should be separated by comma(,).
 This function extracts matrices(files) from the zipped Helsinki Region Travel
@@ -50,7 +50,7 @@ _The function has thesame function as the function 'extract_files'. The only dif
 -  **_separate_folder(True/False):_** this determines if the files should be extracted into same folder or separate folders. Default             value is False.    
 
 
--3      create_shp(zipped_data_path,userinput, grid_shp, filepath, separate_folder=False):
+-      create_shp(zipped_data_path,userinput, grid_shp, filepath, separate_folder=False):
 
 _This creates Shapefiles from the chosen Matrix text tables
 (e.g. travel_times_to_5797076.txt) by joining the Matrix file with MetropAccess_YKR_grid 
@@ -71,7 +71,7 @@ are named in a way that it is possible to identify the ID from the name (e.g. 57
          
          
          
- -4     show_travel_mode(zipped_data_path,userinput, tt_col, filepath, grid_shp, sea=None, roads=None,train=None, 
+ -     show_travel_mode(zipped_data_path,userinput, tt_col, filepath, grid_shp, sea=None, roads=None,train=None, 
             metro=None, roads_color='grey', metro_color='red', 
             train_color='blue',map_type='interactive', destination_style='circle', destination_color='blue',       
             classification='pysal_class', class_type="Quantiles", n_classes=8,
@@ -144,7 +144,7 @@ the label_upper_limit level shows those values that are greater than that level(
 
 
 
--5      compare_travel_modes(zipped_data_path,userinput, filepath, grid_shp, sea=None, roads=None,
+-      compare_travel_modes(zipped_data_path,userinput, filepath, grid_shp, sea=None, roads=None,
         train=None, metro=None,compare_mod=[], create_shapefiles=True, visualisation=True, 
         map_type='interactive', destination_style='circle', destination_color='blue',
         roads_color='grey', metro_color='red', train_color='yellow',classification='pysal_class', 
