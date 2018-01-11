@@ -14,7 +14,7 @@ You should upload all your codes into this repository and write a **good documen
 
  The function has thesame function as the function 'extract_files'. The only difference is that the user is prompted to input the            values which should be separated by comma(,).
 
- zipped_data_path: This is the path to the zipped Helsinki travel time matrices data which should be specified.
+ -  **_zipped_data_path:_** This is the path to the zipped Helsinki travel time matrices data which should be specified.
 
  filepath: output filepath where the matrices files will be extracted to.
 
