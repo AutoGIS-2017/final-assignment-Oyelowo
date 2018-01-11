@@ -20,20 +20,33 @@ NOTE: for the travel time matrices, the file path of the zipped file should be s
 -  Travel time matrices and metropo Access grid shapefile: http://blogs.helsinki.fi/accessibility/helsinki-region-travel-time-matrix-2015/. Various attributes(including the travel modes) in the travel time matrices are:
 
 
-from_id:	ID number of the origin grid cell
-to_id:	ID number of the destination grid cell
-walk_t:	Travel time in minutes from origin to destination by walking
-walk_d:	Distance in meters of the walking route
-pt_r_tt:	Travel time in minutes from origin to destination by public transportation in rush hour traffic; whole travel chain has been taken into acount including the waiting time at home
-pt_r_t:	Travel time in minutes from origin to destination by public transportation in rush hour traffic; whole travel chain has been taken into account excluding the waiting time at home
-pt_r_d:	Distance in meters of the public transportation route in rush hour traffic
-pt_m_tt:	Travel time in minutes from origin to destination by public transportation in midday traffic; whole travel chain has been taken into acount including the waiting time at home
-pt_m_t:	Travel time in minutes from origin to destination by public transportation in midday traffic; whole travel chain has been taken into account excluding the waiting time at home
-pt_m_d:	Distance in meters of the public transportation route in midday traffic
-car_r_t: 	Travel time in minutes from origin to destination by private car in rush hour traffic; the whole travel chain has been taken into account (see “Methods” section below)
-car_r_d:	Distance in meters of the private car route in rush hour traffic
-car_m_t:	Travel time in minutes from origin to destination by private car in midday traffic; the whole travel chain has been taken into account (see “Methods” section below)
-car_m_d:	Distance in meters of the private car route in midday traffic
+-    from_id:	ID number of the origin grid cell'
+
+-    to_id:	ID number of the destination grid cell
+
+-    walk_t:	Travel time in minutes from origin to destination by walking
+
+-    walk_d:	Distance in meters of the walking route
+
+-  pt_r_tt:	Travel time in minutes from origin to destination by public transportation in rush hour traffic; whole travel chain has been taken into acount including the waiting time at home.
+
+-  pt_r_t:	Travel time in minutes from origin to destination by public transportation in rush hour traffic; whole travel chain has been taken into account excluding the waiting time at home.
+
+-  pt_r_d:	Distance in meters of the public transportation route in rush hour traffic.
+
+-  pt_m_tt:	Travel time in minutes from origin to destination by public transportation in midday traffic; whole travel chain has been taken into acount including the waiting time at home.
+
+-  pt_m_t:	Travel time in minutes from origin to destination by public transportation in midday traffic; whole travel chain has been taken into account excluding the waiting time at home.
+
+-  pt_m_d:	Distance in meters of the public transportation route in midday traffic.
+
+-  car_r_t: 	Travel time in minutes from origin to destination by private car in rush hour traffic; the whole travel chain has been taken into account (see “Methods” section below).
+
+-  car_r_d:	Distance in meters of the private car route in rush hour traffic.
+
+-  car_m_t:	Travel time in minutes from origin to destination by private car in midday traffic; the whole travel chain has been taken into account (see “Methods” section below).
+
+-  car_m_d:	Distance in meters of the private car route in midday traffic
 
 -  shapefiles for the Sea, metro rail line, roads can train rail line(Railway) can be found in my [repository](https://github.com/AutoGIS-2017/final-assignment-Oyelowo/tree/master/data)
 
