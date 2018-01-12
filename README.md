@@ -26,6 +26,7 @@ When this is done, the functions can be used as in the below examples:
 AccessViz.AccessViz.explore.create_shp
 
 However, it is recommended to shorten the name when importing. For example:
+
 **from AccessViz.AccessViz import explore as expl**
 
 
