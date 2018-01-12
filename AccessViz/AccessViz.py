@@ -102,23 +102,20 @@ class explore:
         
         #Extract the name lists from the zipped file
         namelist= data_zip.namelist()
-        
                 
         #create an empty list which will be used later to include the available inputs out of 
         #the specified inputs by the user.
         m_list=[]
-         
+
         #iterate over the userinput, to get all its element/values
-        for element in namelist:
+        for element in userinput:
             
-            #concatenate the input with the strings to get the standard names of the file.
-            #here namelist[0] is "HelsinkiRegion_TravelTimeMatrix2015/" . I did this to 
-            #increase the flexibility in case the travel time matrix year is changed.
-            element_file=(namelist[0] +str(element)[0:4]+"xxx/travel_times_to_ "+ str(element) + ".txt")
+            #create a list of destination grid IDs from all the file names
+            dest_ids=[i[-11:-4] for i in namelist if i[-4:]=='.txt' and 'METADATA' not in i]
+            dest_ids_file=[i for i in namelist if i[-4:]=='.txt' and 'METADATA' not in i]
             
-            #now, check if the file is not in  namelist of all the files in the ziped folder.
-            #if it is not, give the warning
-            if element_file not in namelist:
+#            check if the specified grid id(i.e userinput) is in the list of ids created earlier
+            if str(element) not in dest_ids:
                 print("WARNING: The specified matrix {0} is not available".format(element))
                 print("\n")
             else:
@@ -128,12 +125,13 @@ class explore:
                 #check for the progress
                 print("Processing file travel_times_to_{0}.txt.. Progress: {1}/{2}".format(element,len([i for i in range(len(m_list))]), len(userinput)))
                 
-                #The above can also simply be done as below
-                #slice the string. This is used for the following step, just
-                #to know which of the matrix is presently being extracted.
-                #f_slice=filename[44:]
-                #prinSt("processing file {0}.. Progress: {1}/{2}".format(f_slice,len([i for i in range(len(m_list))]), len(m_list)))
-                    
+                
+#                fine the index of the grid ID(element) in the destination ids list created earlier.
+                element_index= dest_ids.index(str(element))
+                
+                #use this to find the corresponding file in the destination ids filename list created earlier
+                element_file=dest_ids_file[element_index]
+                
                 #check the size of each file
                 bytes = data_zip.read(element_file)
         
@@ -156,6 +154,7 @@ class explore:
              
         #check if all of the imputed values does not exist
         check_input(userinput=userinput, main_list=m_list)
+            
             
 
     
@@ -182,64 +181,64 @@ class explore:
         separate_folder(True/False): this determines if the files should be extracted into same folder or separate folders. Default value is False.    
         """
         
-        #read the zipped travel time matrices
+              #read the zipped travel time matrices
         data_zip = zipfile.ZipFile(zipped_data_path, "r")
-    
-        #This# can also be done by just including the list in the argument.
-        #Extract the names of all the lists from the zipped file
-        namelist= data_zip.namelist()
         
+        #Extract the name lists from the zipped file
+        namelist= data_zip.namelist()
                 
-        #create an empty list
+        #create an empty list which will be used later to include the available inputs out of 
+        #the specified inputs by the user.
         m_list=[]
-        #iterate over all the names in the namelist of the zipped folders
+
+        #iterate over the userinput, to get all its element/values
         for element in userinput:
-                #concatenate the input with the strings to get the standard names of the file.
-            #here namelist[0] is "HelsinkiRegion_TravelTimeMatrix2015/" . I did this to 
-            #increase the flexibility in case the travel time matrix year is changed.
-            element_file=(namelist[0] +str(element)[0:4]+"xxx/travel_times_to_ "+ str(element) + ".txt")
             
-            #iterate over the userinput, to get all its element/values
+            #create a list of destination grid IDs from all the file names
+            dest_ids=[i[-11:-4] for i in namelist if i[-4:]=='.txt' and 'METADATA' not in i]
+            dest_ids_file=[i for i in namelist if i[-4:]=='.txt' and 'METADATA' not in i]
             
-            #when each element is converted to string, check if the length
-            #of the string is equal to normal length of every matrix ID(i.e, 7)
-            # and also if the element is in the filename in the namelist
-            if element_file not in namelist:
+#            check if the specified grid id(i.e userinput) is in the list of ids created earlier
+            if str(element) not in dest_ids:
                 print("WARNING: The specified matrix {0} is not available".format(element))
                 print("\n")
             else:
                 print("Matrix {0} is available".format(element))
-                                    #check for the progress
+                m_list.append(element)
+                
+                #check for the progress
                 print("Processing file travel_times_to_{0}.txt.. Progress: {1}/{2}".format(element,len([i for i in range(len(m_list))]), len(userinput)))
                 
-                #The above can also simply be done as below
-                #slice the string. This is used for the following step, just
-                #to know which of the matrix is presently being extracted.
-                #f_slice=filename[44:]
-                #print("processing file {0}.. Progress: {1}/{2}".format(f_slice,len([i for i in range(len(m_list))]), len(m_list)))
                 
-                m_list.append(element)
+#                fine the index of the grid ID(element) in the destination ids list created earlier.
+                element_index= dest_ids.index(str(element))
+                
+                #use this to find the corresponding file in the destination ids filename list created earlier
+                element_file=dest_ids_file[element_index]
+                
+                #check the size of each file
                 bytes = data_zip.read(element_file)
-                    #print the file size
+        
+                #print the file size
                 print('has',len(bytes),'bytes')
                 print("\n")
                 
-                 #export the matrices into different folders
-            if separate_folders==True:
-                #extract the available travel time matrix out of the specified by the user.
-                data_zip.extract(element_file, path= filepath)
-            
-            #read the data
-            tt_matrices= pd.read_csv(element_file, sep=";")
-            
-            #export all the files into thesame folder.
-            if separate_folders==False:
-                #save the selected files into same folder
-                tt_matrices.to_csv(filepath + "/"+str(element)+ file_format, sep)      
+                #export the matrices into different folders
+                if separate_folders==True:
+                    #extract the available travel time matrix out of the specified by the user.
+                    data_zip.extract(element_file, path= filepath)
+                
+                #read the data
+                tt_matrices= pd.read_csv(element_file, sep=";")
+                
+                #export all the files into thesame folder.
+                if separate_folders==False:
+                    #save the selected files into same folder
+                    tt_matrices.to_csv(filepath + "/"+str(element)+ file_format, sep)      
              
         #check if all of the imputed values does not exist
         check_input(userinput=userinput, main_list=m_list)
-        
+            
             
 
 
