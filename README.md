@@ -10,7 +10,7 @@ Read the final assignment instructions from the [https://autogis.github.io](http
   
 AccessViz module can be used to explore the Heslinki travel time matrices to analyse and visualise the Accessibility of various places in the area by different modes of transportation. More information can be found on the [Accessibility group page](http://blogs.helsinki.fi/accessibility/helsinki-region-travel-time-matrix-2015/). The module can be used as below:
 
-**from AccessViz.AccessViz import explore**
+**from AccessViz import explore**
 
 _Here, the name of the package is AccessViz, the module is AccessViz while the functions can be found in the class "explore".
 
@@ -20,14 +20,14 @@ By importing this way, the functions can be called as below:
 
 It is also possible to import the module directly as:
 
-**import AcessViz.AccessViz**
+**import AccessViz**
 
-When this is done, the functions can be used as in the below examples:
-AccessViz.AccessViz.explore.create_shp
+When this is done, the functions can be used as in the below example:
+**AccessViz.explore.create_shp**
 
 However, it is recommended to shorten the name when importing. For example:
 
-**from AccessViz.AccessViz import explore as expl**
+**from AccessViz import explore as expl**
 
 
 Different functions in the AccessViz module include: **_extract_prompt, extract, create_shp, show_travel_mode and compare_travel_modes._** See below for the documentation.
