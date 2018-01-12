@@ -30,7 +30,7 @@ However, it is recommended to shorten the name when importing. For example:
 **from AccessViz.AccessViz import explore as expl**
 
 
-Different functions in the AccessViz module include: extract_prompt, extract, create_shp, show_travel_mode and compare_travel_modes. See below for the documentation.
+Different functions in the AccessViz module include: **_extract_prompt, extract, create_shp, show_travel_mode and compare_travel_modes._** See below for the documentation.
 
 This [source code can be found here](https://github.com/AutoGIS-2017/final-assignment-Oyelowo/blob/master/AccessViz/AccessViz.py).
 It is also important to use the module get_geom which AccessViz depends on in some parts. The source code of this can be found [here](https://github.com/AutoGIS-2017/final-assignment-Oyelowo/blob/master/AccessViz/get_geom.py).
