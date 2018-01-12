@@ -3,7 +3,7 @@
 Read the final assignment instructions from the [https://autogis.github.io](https://automating-gis-processes.github.io/2017/lessons/FA/final-assignment.html).
 
 
-  **AccessViz**.
+# AccessViz
   
   [You can select a desired grid ID from interactive map here.](https://autogis-2017.github.io/final-assignment-Oyelowo/AccessViz/YKR_grid_values.html)
  
@@ -38,9 +38,12 @@ It is also important to use the module get_geom which AccessViz depends on in so
 NOTE: for the travel time matrices, the file path of the zipped file should be specified while for the MetropoAcess grid, the shapefile can be loaded with the geopandas module.  
 
 **LINKS TO THE VARIOUS DATA USED/NEEDED:**
+
+-  shapefiles for the Sea, metro rail line, roads can train rail line(Railway) can be found in my [repository](https://github.com/AutoGIS-2017/final-assignment-Oyelowo/tree/master/data).
+
 -  Travel time matrices and metropo Access grid shapefile: http://blogs.helsinki.fi/accessibility/helsinki-region-travel-time-matrix-2015/. Various attributes(including the travel modes) in the travel time matrices are:
 
-
+### ATTRIBUTES
 -    from_id:	ID number of the origin grid cell'
 
 -    to_id:	ID number of the destination grid cell
@@ -69,8 +72,8 @@ NOTE: for the travel time matrices, the file path of the zipped file should be s
 
 -  car_m_d:	Distance in meters of the private car route in midday traffic
 
--  shapefiles for the Sea, metro rail line, roads can train rail line(Railway) can be found in my [repository](https://github.com/AutoGIS-2017/final-assignment-Oyelowo/tree/master/data)
 
+## FIRST FUNCTION: extract_prompt
 -      extract_prompt(zipped_data_path, filepath, sep=";", file_format=".txt",separate_folders=False):
        
  _This function extracts matrices(files) from the zipped Helsinki Region Travel
@@ -95,6 +98,7 @@ NOTE: for the travel time matrices, the file path of the zipped file should be s
 
 
 
+## SECOND FUNCTION: extract
 
 -      extract(zipped_data_path, filepath,userinput, sep=";", file_format=".txt", separate_folders=False):
 
@@ -122,6 +126,7 @@ _The function has thesame function as the function 'extract_files'. The only dif
 **_explore.extract(zipped_data_path= "C:/Users/oyedayo/HelsinkiRegion_TravelTimeMatrix2015.zip", userinput=[6016696, 6015141, 5991603 ],separate_folders=True separate_folders=False, filepath= "C:/Users/oyedayo/matrices", sep=",", file_format='.txt')_**
 
 
+## THIRD FUNCTION: create_shp
 
 -      create_shp(zipped_data_path,userinput, grid_shp, filepath, separate_folder=False):
 
@@ -146,6 +151,8 @@ are named in a way that it is possible to identify the ID from the name (e.g. 57
       **_explore.create_shp(zipped_data_path="C:/Users/oyedayo/HelsinkiRegion_TravelTimeMatrix2015.zip", separate_folder=False, userinput=[6016696, 6015141, 5991603 ], grid_shp= shape_file_of_the_MetropAccess_YKR_grid, filepath= r"C:\Users\oyeda\Desktop\AUTOGIS\FINAL_ASSIGNMENT\merged")_**
 
          
+     
+## FOURTH FUNCTION: show_travel_mode
          
  -     show_travel_mode(zipped_data_path,userinput, tt_col, filepath, grid_shp, sea=None, roads=None,train=None, 
             metro=None, roads_color='grey', metro_color='red', 
@@ -225,7 +232,7 @@ the label_upper_limit level shows those values that are greater than that level(
            grid_shp=mtp, tt_col="car_r_t", n_classes=5, classification='pysal_class',  
            class_type='Equal_Interval', filepath=r"C:\Users\oyeda\Desktop\AUTOGIS\FINAL_ASSIGNMENT\visualise")_**
 
-
+## FIFTH FUNCTION: compare_travel_modes
 
 -      compare_travel_modes(zipped_data_path,userinput, filepath, grid_shp, sea=None, roads=None,
         train=None, metro=None,compare_mod=[], create_shapefiles=True, visualisation=True, 
