@@ -54,7 +54,7 @@ def check_input(userinput, main_list):
         #check for those that are not included in the matrices
     elif any(absentinput) not in main_list:
         #warn that they do not exist
-        print("WARNING: ", absentinput, ".txt do not exist")
+        print("WARNING: ", str(absentinput).strip("[]"), " do not exist")
         #check how many of them are not in the matrices
         print(len(absentinput), "of the inputs are not included in the matrices")   
         print("\n")
