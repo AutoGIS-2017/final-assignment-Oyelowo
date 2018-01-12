@@ -1056,7 +1056,6 @@ class explore:
 #                            break
                 else:
                     if len(compare_mod)> 2:
-                #userinput= [int(x) for x in input("list the ID-numbers you want to read and separate each by a comma(,): ").split(',')]
                         raise AccessVizError("WARNING: More than two travel modes are not allowed. Specify only two similar travel modes(i.e either distance or time but not both at thesame time)")
 #                            break
                     elif len(compare_mod)==2:
