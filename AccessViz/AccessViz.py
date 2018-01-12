@@ -277,29 +277,32 @@ class explore:
         #userinput= [int(x) for x in input("list the ID-numbers you want to read and separate each by a comma(,): ").split(',')]
         namelist= data_zip.namelist()
         m_list=[]
+        
         #iterate over the userinput, to get all its element/values
         for element in userinput:
-            #concatenate the input with the strings to get the standard names of the file.
-            #here namelist[0] is "HelsinkiRegion_TravelTimeMatrix2015/" . I did this to 
-            #increase the flexibility in case the travel time matrix year is changed.
-            element_file=(namelist[0] +str(element)[0:4]+"xxx/travel_times_to_ "+ str(element) + ".txt")
             
-            #now, check if the file is in not namelist of all the files in the ziped folder.
-            #if it is not, give the warning
-            if element_file not in namelist:
+            #create a list of destination grid IDs from all the file names
+            dest_ids=[i[-11:-4] for i in namelist if i[-4:]=='.txt' and 'METADATA' not in i]
+            dest_ids_file=[i for i in namelist if i[-4:]=='.txt' and 'METADATA' not in i]
+            
+#            check if the specified grid id(i.e userinput) is in the list of ids created earlier
+            if str(element) not in dest_ids:
                 print("WARNING: The specified matrix {0} is not available".format(element))
                 print("\n")
             else:
                 print("Matrix {0} is available".format(element))
                 m_list.append(element)
-                                    #check for the progress
+                
+                #check for the progress
                 print("Processing file travel_times_to_{0}.txt.. Progress: {1}/{2}".format(element,len([i for i in range(len(m_list))]), len(userinput)))
-                 #The above can also simply be done as below
-                #slice the string. This is used for the following step, just
-                #to know which of the matrix is presently being extracted.
-                #f_slice=filename[44:]
-                #print("processing file {0}.. Progress: {1}/{2}".format(f_slice,len([i for i in range(len(m_list))]), len(userinput)))
-                    
+                
+                
+#                fine the index of the grid ID(element) in the destination ids list created earlier.
+                element_index= dest_ids.index(str(element))
+                
+                #use this to find the corresponding file in the destination ids filename list created earlier
+                element_file=dest_ids_file[element_index]
+                
                 bytes = data_zip.read(element_file)
                     #print the file size
                 print('has',len(bytes),'bytes')
@@ -480,30 +483,33 @@ class explore:
         #userinput= [int(x) for x in input("list the ID-numbers you want to read and separate each by a comma(,): ").split(',')]
         namelist=data_zip.namelist()
         m_list=[]
-        #iterate over the userinput, to get all its element/values
+        
+                #iterate over the userinput, to get all its element/values
         for element in userinput:
-            #concatenate the input with the strings to get the standard names of the file.
-            #here namelist[0] is "HelsinkiRegion_TravelTimeMatrix2015/" . I did this to 
-            #increase the flexibility in case the travel time matrix year is changed.
-            element_file=(namelist[0] +str(element)[0:4]+"xxx/travel_times_to_ "+ str(element) + ".txt")
             
-            #now, check if the file is in not namelist of all the files in the ziped folder.
-            #if it is not, give the warning
-            if element_file not in namelist:
+            #create a list of destination grid IDs from all the file names
+            dest_ids=[i[-11:-4] for i in namelist if i[-4:]=='.txt' and 'METADATA' not in i]
+            dest_ids_file=[i for i in namelist if i[-4:]=='.txt' and 'METADATA' not in i]
+            
+#            check if the specified grid id(i.e userinput) is in the list of ids created earlier
+            if str(element) not in dest_ids:
                 print("WARNING: The specified matrix {0} is not available".format(element))
                 print("\n")
             else:
                 print("Matrix {0} is available".format(element))
                 m_list.append(element)
-                                    #check for the progress
+                
+                #check for the progress
                 print("Processing file travel_times_to_{0}.txt.. Progress: {1}/{2}".format(element,len([i for i in range(len(m_list))]), len(userinput)))
                 
-                #The above can also simply be done as below
-                #slice the string. This is used for the following step, just
-                #to know which of the matrix is presently being extracted.
-                #f_slice=filename[44:]
-                #print("processing file {0}.. Progress: {1}/{2}".format(f_slice,len([i for i in range(len(m_list))]), len(m_list)))
-                    
+                
+#                fine the index of the grid ID(element) in the destination ids list created earlier.
+                element_index= dest_ids.index(str(element))
+                
+                #use this to find the corresponding file in the destination ids filename list created earlier
+                element_file=dest_ids_file[element_index]
+                
+                
                 bytes = data_zip.read(element_file)
                     #print the file size
                 print('has',len(bytes),'bytes')
@@ -1005,31 +1011,31 @@ class explore:
 
         namelist=data_zip.namelist()
         m_list=[]
-        #iterate over the userinput, to get all its element/values
+               #iterate over the userinput, to get all its element/values
         for element in userinput:
-           #concatenate the input with the strings to get the standard names of the file.
-            #here namelist[0] is "HelsinkiRegion_TravelTimeMatrix2015/" . I did this to 
-            #increase the flexibility in case the travel time matrix year is changed.
-            element_file=(namelist[0] +str(element)[0:4]+"xxx/travel_times_to_ "+ str(element) + ".txt")
             
+            #create a list of destination grid IDs from all the file names
+            dest_ids=[i[-11:-4] for i in namelist if i[-4:]=='.txt' and 'METADATA' not in i]
+            dest_ids_file=[i for i in namelist if i[-4:]=='.txt' and 'METADATA' not in i]
             
-            #now, check if the file is in not namelist of all the files in the ziped folder.
-            #if it is not, give the warning
-            if element_file not in namelist:
+#            check if the specified grid id(i.e userinput) is in the list of ids created earlier
+            if str(element) not in dest_ids:
                 print("WARNING: The specified matrix {0} is not available".format(element))
                 print("\n")
             else:
                 print("Matrix {0} is available".format(element))
                 m_list.append(element)
-                                    #check for the progress
+                
+                #check for the progress
                 print("Processing file travel_times_to_{0}.txt.. Progress: {1}/{2}".format(element,len([i for i in range(len(m_list))]), len(userinput)))
                 
-                #The above can also simply be done as below
-                #slice the string. This is used for the following step, just
-                #to know which of the matrix is presently being extracted.
-                #f_slice=filename[44:]
-                #print("processing file {0}.. Progress: {1}/{2}".format(f_slice,len([i for i in range(len(m_list))]), len(m_list)))
-                    
+                
+#                fine the index of the grid ID(element) in the destination ids list created earlier.
+                element_index= dest_ids.index(str(element))
+                
+                #use this to find the corresponding file in the destination ids filename list created earlier
+                element_file=dest_ids_file[element_index]
+                 
                 bytes = data_zip.read(element_file)
                     #print the file size
                 print('has',len(bytes),'bytes')
