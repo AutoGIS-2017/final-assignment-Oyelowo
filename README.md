@@ -86,7 +86,7 @@ Time Matrix, according to the specified userinputs(matrix ID) which is the grid 
 the specified input is not included in the matrices
 specified by use._
 
-_The function has thesame function as the function 'extract_files'. The only difference is that the user is prompted to input the          values which should be separated by comma(,)._
+_The function has thesame function as the function 'extract_files'. The only difference is that the user is not prompted to input the grid values but this should be specified in the parameter 'userinput'._
 
 -  **_zipped_data_path:_** This is the path to the zipped Helsinki travel time matrices data which should be specified.
 
@@ -303,8 +303,9 @@ the label_upper_limit level shows those values that are greater than that level(
 
 
   **EXAMPLE OF USAGE:**
-  **_explore.compare_travel_modes(zipped_data_path="C:/Users/oyedayo/HelsinkiRegion_TravelTimeMatrix2015.zip", train=train_shapefile,                      metro=metroline_shapefile, roads=roads_shapefile, compare_mod=["pt_r_tt", "car_r_t"], create_shapefiles=True,                          visualisation=True, roads_color='grey', metro_color='red', train_color='blue', userinput=[6015141, 5991603, 5991515], 
+  
+   **_explore.compare_travel_modes(zipped_data_path="C:/Users/oyedayo/HelsinkiRegion_TravelTimeMatrix2015.zip", train=train_shapefile,                      metro=metroline_shapefile, roads=roads_shapefile, compare_mod=["pt_r_tt", "car_r_t"], create_shapefiles=True,                          visualisation=True, roads_color='grey', metro_color='red', train_color='blue', userinput=[6015141, 5991603, 5991515], 
            destination_style='circle', destination_color='blue',map_type='interactive',
            grid_shp=mtp, tt_col="car_r_t",n_classes=5, classification='pysal_class',  
-           class_type='Equal_Interval' , filepath=r"C:\Users\oyeda\Desktop\AUTOGIS\FINAL_ASSIGNMENT\visualise") _**
+           class_type='Equal_Interval' , filepath=r"C:\Users\oyeda\Desktop\AUTOGIS\FINAL_ASSIGNMENT\visualise")_**
 
