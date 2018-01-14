@@ -16,21 +16,21 @@ _Here, the name of the package is AccessViz, the module is AccessViz while the f
 
 By importing this way, the functions can be called as below:
 
-**_e.g, explore.extract, explore.create_shp etc._**
+**_e.g, explore.extract, explore.merge_shp etc._**
 
 It is also possible to import the module directly as:
 
 **import AccessViz**
 
 When this is done, the functions can be used as in the below example:
-**AccessViz.explore.create_shp**
+**AccessViz.explore.merge_shp**
 
 However, it is recommended to shorten the name when importing. For example:
 
 **from AccessViz import explore as expl**
 
 
-Different functions in the AccessViz module include: **_extract_prompt, extract, create_shp, show_travel_mode and compare_travel_modes._** See below for the documentation.
+Different functions in the AccessViz module include: **_extract_prompt, extract, merge_shp, show_travel_mode and compare_travel_modes._** See below for the documentation.
 
 This [source code can be found here](https://github.com/AutoGIS-2017/final-assignment-Oyelowo/blob/master/AccessViz/AccessViz.py).
 It is also important to use the module get_geom which AccessViz depends on in some parts. The source code of this can be found [here](https://github.com/AutoGIS-2017/final-assignment-Oyelowo/blob/master/AccessViz/get_geom.py).
@@ -126,9 +126,9 @@ _The function has thesame function as the function 'extract_files'. The only dif
 **_explore.extract(zipped_data_path= "C:/Users/oyedayo/HelsinkiRegion_TravelTimeMatrix2015.zip", userinput=[6016696, 6015141, 5991603 ],separate_folders=True separate_folders=False, filepath= "C:/Users/oyedayo/matrices", sep=",", file_format='.txt')_**
 
 
-## THIRD FUNCTION: create_shp
+## THIRD FUNCTION: merge_shp
 
--      create_shp(zipped_data_path,userinput, grid_shp, filepath, separate_folder=False):
+-      merge_shp(zipped_data_path,userinput, grid_shp, filepath, separate_folder=False):
 
 _This creates Shapefiles from the chosen Matrix text tables
 (e.g. travel_times_to_5797076.txt) by joining the Matrix file with MetropAccess_YKR_grid 
@@ -148,7 +148,7 @@ are named in a way that it is possible to identify the ID from the name (e.g. 57
        
       **EXAMPLE OF USAGE:**
       
-      **_explore.create_shp(zipped_data_path="C:/Users/oyedayo/HelsinkiRegion_TravelTimeMatrix2015.zip", separate_folder=False, userinput=[6016696, 6015141, 5991603 ], grid_shp= shape_file_of_the_MetropAccess_YKR_grid, filepath= r"C:\Users\oyeda\Desktop\AUTOGIS\FINAL_ASSIGNMENT\merged")_**
+      **_explore.merge_shp(zipped_data_path="C:/Users/oyedayo/HelsinkiRegion_TravelTimeMatrix2015.zip", separate_folder=False, userinput=[6016696, 6015141, 5991603 ], grid_shp= shape_file_of_the_MetropAccess_YKR_grid, filepath= r"C:\Users\oyeda\Desktop\AUTOGIS\FINAL_ASSIGNMENT\merged")_**
 
          
      
