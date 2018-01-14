@@ -56,8 +56,8 @@ def check_input(userinput, main_list):
         #warn that they do not exist
         print("WARNING: ", str(absentinput).strip("[]"), " do not exist")
         #check how many of them are not in the matrices
-        print(len(absentinput), "of the inputs are not included in the matrices")   
-        print("\n")
+        print(len(absentinput), "of the inputs are not included in the matrices\n")   
+        
             
 
 # =============================================================================
@@ -116,8 +116,8 @@ class explore:
             
 #            check if the specified grid id(i.e userinput) is in the list of ids created earlier
             if str(element) not in dest_ids:
-                print("WARNING: The specified matrix {0} is not available".format(element))
-                print("\n")
+                print("WARNING: The specified matrix {0} is not available\n".format(element))
+                
             else:
                 print("Matrix {0} is available".format(element))
                 m_list.append(element)
@@ -136,8 +136,8 @@ class explore:
                 bytes = data_zip.read(element_file)
         
                 #print the file size
-                print('has',len(bytes),'bytes')
-                print("\n")
+                print('has',len(bytes),'bytes\n')
+                
                 
                 #export the matrices into different folders
                 if separate_folders==True:
@@ -200,8 +200,8 @@ class explore:
             
 #            check if the specified grid id(i.e userinput) is in the list of ids created earlier
             if str(element) not in dest_ids:
-                print("WARNING: The specified matrix {0} is not available".format(element))
-                print("\n")
+                print("WARNING: The specified matrix {0} is not available\n".format(element))
+                
             else:
                 print("Matrix {0} is available".format(element))
                 m_list.append(element)
@@ -220,8 +220,8 @@ class explore:
                 bytes = data_zip.read(element_file)
         
                 #print the file size
-                print('has',len(bytes),'bytes')
-                print("\n")
+                print('has',len(bytes),'bytes\n')
+                
                 
                 #export the matrices into different folders
                 if separate_folders==True:
@@ -251,7 +251,7 @@ class explore:
 # You should name the files in a way that it is possible to identify the ID from the name (e.g. 5797076)
 # =============================================================================
   
-    def create_shp(zipped_data_path,userinput, grid_shp, filepath, separate_folder=False):
+    def merge_shp(zipped_data_path,userinput, grid_shp, filepath, separate_folder=False):
         """
         This creates Shapefiles from the chosen Matrix text tables
         (e.g. travel_times_to_5797076.txt) by joining the Matrix file with MetropAccess_YKR_grid 
@@ -287,8 +287,8 @@ class explore:
             
 #            check if the specified grid id(i.e userinput) is in the list of ids created earlier
             if str(element) not in dest_ids:
-                print("WARNING: The specified matrix {0} is not available".format(element))
-                print("\n")
+                print("WARNING: The specified matrix {0} is not available\n".format(element))
+                
             else:
                 print("Matrix {0} is available".format(element))
                 m_list.append(element)
@@ -305,8 +305,8 @@ class explore:
                 
                 bytes = data_zip.read(element_file)
                     #print the file size
-                print('has',len(bytes),'bytes')
-                print("\n")
+                print('has',len(bytes),'bytes\n')
+                
                     
                 tt_matrices= pd.read_csv(element_file, sep=";")
                 merged_metro = pd.merge(grid_shp,tt_matrices,  left_on="YKR_ID", right_on="from_id")
@@ -446,6 +446,7 @@ class explore:
             train=train.to_crs(from_epsg(3067))
             tdfsource = GeoJSONDataSource(geojson=train.to_json())
             
+            #Alternative without using GeoJSONDataSource
 #            train['x'] = train.apply(get_geom.getCoords, geom_col="geometry", coord_type="x", axis=1)
 #            
 #            train['y'] = train.apply(get_geom.getCoords, geom_col="geometry", coord_type="y", axis=1)
@@ -460,6 +461,7 @@ class explore:
             metro=metro.to_crs(from_epsg(3067))
             mdfsource = GeoJSONDataSource(geojson=metro.to_json())
             
+            #alternative
 #              #Calculate the x and y coordinates of metro.
 #            metro['x'] = metro.apply(get_geom.getCoords, geom_col="geometry", coord_type="x", axis=1)
 #            
@@ -493,8 +495,8 @@ class explore:
             
 #            check if the specified grid id(i.e userinput) is in the list of ids created earlier
             if str(element) not in dest_ids:
-                print("WARNING: The specified matrix {0} is not available".format(element))
-                print("\n")
+                print("WARNING: The specified matrix {0} is not available\n".format(element))
+                
             else:
                 print("Matrix {0} is available".format(element))
                 m_list.append(element)
@@ -512,15 +514,15 @@ class explore:
                 
                 bytes = data_zip.read(element_file)
                     #print the file size
-                print('has',len(bytes),'bytes')
-                print("\n")
+                print('has',len(bytes),'bytes\n')
+                
                     
                 tt_matrices= pd.read_csv(element_file, sep=";")
                 
                 #This is done to handle matrices with nodata at all. e.g: matrix"6016696"
                 if tt_matrices['to_id'].max()==-1:
-                    print('The MATRIX- {0} is empty and has nodata'.format(element))
-                    print('\n')
+                    print('The MATRIX- {0} is empty and has nodata\n'.format(element))
+                    
                 else:
                     merged_metro = pd.merge(grid_shp,tt_matrices,  left_on="YKR_ID", right_on="from_id")
                     #print(merged_metro)
@@ -591,24 +593,30 @@ class explore:
                         
                         #Join the classes back to the main data.
                         merged_metro = merged_metro.join(mode_classif)
-                        #data = data.join(walk_classif)
-                        #Create names for the legend (until 60 minutes). The following will produce: ["0-5", "5-10", "10-15", ... , "60 <"].
-#                        upper_limit = 60
-#                       
-#                        step = 10
-#                        lower_limit=0
-                        names = ["%s-%s" % (x-label_step, x) for x in range(label_lower_limit, label_upper_limit, label_step)]
+                        
+                        
+                       #Create names for the legend (until certain minutes). The following will produce: e.g["0-5", "5-10", "10-15", ... , "60 <"]. 
+                        #inside the range function, the label_lower_limit is added to the 
+                        #label_step to give the stated lower_limit because they are first subtracted(i.e x - label_step)
+                        #at the beginning.
+                        names = ["%s-%s" % (x-label_step, x) for x in range(label_lower_limit + label_step, label_upper_limit, label_step)]
                         #         ["{0}kk{1}".format(x-5,x) for x in range(5, 200, 5)]   #alternative
                         
-                        #Add legend label for over 60.
+# =============================================================================
+#                                you can try the below for further clarification
+#                                 upper_limit = 60
+#                                 step = 15
+#                                 lower_limit=0
+#                                 names = ["%s-%s " % (x-step, x) for x in range(lower_limit+ step, upper_limit, step)]
+# =============================================================================
+                                 
+                        #Add legend label for over the label_upper_limit
                         names.append("%s<" % label_upper_limit)
-                        #Assign legend names for the classes.
-                        #data['label_wt'] = None
+
                         
                         merged_metro['label_' + tt_col ] = None
                         
                         #Update rows with the class-names.
-                        
                         for i in range(len(names)):
                             merged_metro.loc[merged_metro[tt_col+"_ud"] == i, 'label_' + tt_col] = names[i]
                            
@@ -620,7 +628,6 @@ class explore:
                     #Finally, we can visualize our layers with Bokeh, add a legend for travel times 
                     #and add HoverTools for Destination Point and the grid values (travel times).
                     # Select only necessary columns for our plotting to keep the amount of data minumum
-                    #df = data[['x', 'y', 'walk_t','walk_t_ud', 'car_r_t','car_r_t_ud', 'from_id', 'label_wt', "label_car"]]
                     df = merged_metro[['x', 'y',"YKR_ID", tt_col,tt_col+"_ud","from_id" ,'label_' + tt_col]]
                     dfsource = ColumnDataSource(data=df)
                     
@@ -715,18 +722,20 @@ class explore:
                                         (tt_col, "@" + tt_col)]  
                         p.add_tools(ghover)
                         
-                          # Insert a circle on top of the location(coords in EurefFIN-TM35FIN)
-                        #print(element)
-                        #because, it  is a grid, the location of each cell has about s x and 
+#                           Insert a circle on top of the location(coords in EurefFIN-TM35FIN)
+                                              
+                        grid_centroid=merged_metro.loc[merged_metro['YKR_ID']==element, 'geometry'].values[0].centroid
+                        dest_grid_x=grid_centroid.x 
+                        dest_grid_y= grid_centroid.y
+        
+#                        Alternative to getting the centre of a grid:
+                        #because, it  is a grid, the location of each cell has about 5 x and 
                         #y coordinates, hence, after finding the x for each grid, select 
                         #one of the x and y coordinates(the third, which is the centre of each grid) from the list.
-                        dest_grid_x = (df.loc[df["YKR_ID"]==element, 'x'].values[0])[2]
-                        dest_grid_y =  (df.loc[df["YKR_ID"]==element, 'y'].values[0])[2]
-                        
-                        #Alternative to getting the centre of a grid:
-        #                grid_centroid=merged_metro.loc[merged_metro['YKR_ID']==element, 'geometry'].values[0].centroid
-        #                dest_grid_x=grid_centroid.x 
-        #                dest_grid_y= grid_centroid.y
+#                        dest_grid_x = (df.loc[df["YKR_ID"]==element, 'x'].values[0])[2]
+#                        dest_grid_y =  (df.loc[df["YKR_ID"]==element, 'y'].values[0])[2]
+#                        
+
                         
                         if destination_style=='circle':
                         # Add two separate hover tools for the data
@@ -775,6 +784,7 @@ class explore:
           
                         dest_grid= gpd.GeoDataFrame()
                         
+#                        Get the destination grid
                         dest_grid_loc = Point(dest_grid_x, dest_grid_y)
                         dest_grid["geometry"]=""
                         dest_grid.loc[1,"geometry"]=dest_grid_loc
@@ -1020,8 +1030,8 @@ class explore:
             
 #            check if the specified grid id(i.e userinput) is in the list of ids created earlier
             if str(element) not in dest_ids:
-                print("WARNING: The specified matrix {0} is not available".format(element))
-                print("\n")
+                print("WARNING: The specified matrix {0} is not available\n".format(element))
+                
             else:
                 print("Matrix {0} is available".format(element))
                 m_list.append(element)
@@ -1038,43 +1048,45 @@ class explore:
                  
                 bytes = data_zip.read(element_file)
                     #print the file size
-                print('has',len(bytes),'bytes')
-                print("\n")
-                    
+                print('has',len(bytes),'bytes\n')
+               
+                #read the data
                 tt_matrices= pd.read_csv(element_file, sep=";")
                 
                 column_list=[i for i in tt_matrices.columns]
                 
+#                create a list of elements in the listed travel modes but not a column name in the travel time dataframe.
                 absent_col= [i for i in compare_mod if i not in column_list]
+                
                 #find if any of the items of the listed transport modes is/are not column(s) in the matrix dataframe
                 if any(x not in column_list for x in compare_mod):
                     if len(absent_col)==1:
                         raise AccessVizError("The specified travel mode", str(absent_col).strip('[]'), "is not available. Accepted travel modes include:", str([i for i in tt_matrices.columns][2:]).strip('[]'))
-#                            break
+#                    for plural(i.e more than one specified wrong travel modes)
                     elif len(absent_col)>1:
                         raise AccessVizError("The specified travel modes:", str(absent_col).strip('[]'), ", are not available. Accepted travel modes include:", str([i for i in tt_matrices.columns][2:]).strip('[]'))
-#                            break
+
                 else:
                     if len(compare_mod)> 2:
                         raise AccessVizError("WARNING: More than two travel modes are not allowed. Specify only two similar travel modes(i.e either distance or time but not both at thesame time)")
-#                            break
+
                     elif len(compare_mod)==2:
                         if compare_mod[0]==compare_mod[1]:
                             raise AccessVizError("WARNING: You are comparing the same travel mode\n")
-#                            break
+
                         elif compare_mod[0][-1] != compare_mod[1][-1]:
                             raise AccessVizError("WARNING!:You cannot compare Travel Distance with Travel Time!!!\n")
-#                            break
+
                     elif len(compare_mod)==1:
                             raise AccessVizError("WARNING: You have specified just one travel mode. \n One travel mode is not allowed. \n Specify two travel modes in the list")
-#                            break
+ 
                    
                       
                     
                 #This is done to handle matrices with nodata at all. e.g: matrix"6016696"
                 if tt_matrices['to_id'].max()==-1:
-                    print('The MATRIX- {0} is empty and has nodata'.format(element))
-                    print('\n')
+                    print('The MATRIX- {0} is empty and has nodata\n'.format(element))
+                    
                 else:
                     merged_metro = pd.merge(grid_shp,tt_matrices,  left_on="YKR_ID", right_on="from_id")
                     
@@ -1083,8 +1095,10 @@ class explore:
                       print('NOTE: You did not specify any travel mode. Therefore, only the travel time matrix' , element, 'and the grid shapefile will be produced ')
                       merged_metro.to_file(driver = 'ESRI Shapefile', filename= filepath+"/travel_times_to_" + str(element) + ".shp")
                 
+#                otherwise, if the right travel modes are specified, find their difference
                     else:
-                        mode1=compare_mod[0]; mode2=compare_mod[1]
+                        mode1=compare_mod[0] 
+                        mode2=compare_mod[1]
                         tt_col=mode1+'_vs_' + mode2
                         
                         #Next I will calculate the difference but be mindful of the empty grids.
@@ -1126,7 +1140,7 @@ class explore:
                             merged_metro= merged_metro.loc[merged_metro[ tt_col]!=-1]
 
                         
-                             #Calculate the x and y coordinates of the grid.
+                             #Calculate the x and y coordinates of the grid. the create getCoords function in get_geom module is used.
                             merged_metro['x'] = merged_metro.apply(get_geom.getCoords, geom_col="geometry", coord_type="x", axis=1)
                 
                             merged_metro['y'] = merged_metro.apply(get_geom.getCoords, geom_col="geometry", coord_type="y", axis=1)
@@ -1171,52 +1185,61 @@ class explore:
                                 
                             
                             elif classification == "User_Defined":
-                                 #Next, we want to classify the travel times with 5 minute intervals until 200 minutes.
+                                 #Next, classify the travel times with x(class_step) minute intervals until y(class_upper_limit) minutes.
                 
-                                #Let’s create a list of values where minumum value is 5, maximum value is 200 and step is 5.
+                                #create a list of values where minumum value is class_lower_limit, maximum value is class_upper_limit and step is class_step.
                                 breaks = [x for x in range(class_lower_limit, class_upper_limit, class_step)]
                                 #Now we can create a pysal User_Defined classifier and classify our travel time values.
-                            
+                                
+#                                create the classifier
                                 classifier = ps.User_Defined.make(bins=breaks)
                             
-                                #walk_classif = data[['walk_t']].apply(classifier)
-                                
+                               
+#                                apply the classifier to the desired column which is the travel modes difference
                                 mode_classif = merged_metro[[tt_col]].apply(classifier)
                                 
                                 
-                                #Rename the columns of our classified columns.
+                                #Rename the columns of the classified column.
                                 mode_classif.columns = [tt_col+"_ud"]
-                                #walk_classif.columns = ['walk_t_ud']
+                                
                                 
                                 #Join the classes back to the main data.
                                 merged_metro = merged_metro.join(mode_classif)
-                                #data = data.join(walk_classif)
-                                #Create names for the legend (until 60 minutes). The following will produce: ["0-5", "5-10", "10-15", ... , "60 <"].
-        #                        
-                                names = ["%s-%s" % (x-label_step, x) for x in range(label_lower_limit, label_upper_limit, label_step)]
+                                
+                                #Create names for the legend (until certain minutes). The following will produce: e.g["0-5", "5-10", "10-15", ... , "60 <"]. 
+                                #inside the range function, the label_lower_limit is added to the 
+                                #label_step to give the stated lower_limit because they are first subtracted(i.e x - label_step)
+                                #at the beginning.
+                                names = ["%s-%s" % (x-label_step, x) for x in range(label_lower_limit + label_step, label_upper_limit, label_step)]
                                 #         ["{0}kk{1}".format(x-5,x) for x in range(5, 200, 5)]   #alternative
                                 
-                                #Add legend label for over 60.
-                                names.append("%s<" % label_upper_limit)
-                                #Assign legend names for the classes.
-                                #data['label_wt'] = None
+# =============================================================================
+#                                you can try the below for further clarification
+#                                 upper_limit = 60
+#                                 step = 15
+#                                 lower_limit=0
+#                                 names = ["%s-%s " % (x-step, x) for x in range(lower_limit+ step, upper_limit, step)]
+# =============================================================================
+                               
                                 
+                                
+                                
+                                #Add legend label for over certain point.
+                                names.append("%s<" % label_upper_limit)
+                                
+                                #Assign legend names for the classes.
                                 merged_metro['label_' + tt_col ] = None
                                 
                                 #Update rows with the class-names.
-                                
                                 for i in range(len(names)):
                                     merged_metro.loc[merged_metro[tt_col+"_ud"] == i, 'label_' + tt_col] = names[i]
                                    
-                                #Update all cells that didn’t get any value with "60 <"
-                                #data['label_wt'] = data['label_wt'].fillna("%s <" % upper_limit)
-                                
+                                #Update all cells that didn’t get any value with "label_upper_limit" e.g "40 <"
                                 merged_metro['label_' + tt_col] = merged_metro['label_' + tt_col].fillna("%s<" % label_upper_limit)
                                 
                             #Finally, we can visualize our layers with Bokeh, add a legend for travel times 
                             #and add HoverTools for Destination Point and the grid values (travel times).
                             # Select only necessary columns for our plotting to keep the amount of data minumum
-                            #df = data[['x', 'y', 'walk_t','walk_t_ud', 'car_r_t','car_r_t_ud', 'from_id', 'label_wt', "label_car"]]
                             df = merged_metro[['x','y',"YKR_ID",mode1,mode2, tt_col,tt_col+"_ud","from_id" ,'label_' + tt_col]]
                             dfsource = ColumnDataSource(data=df)
 #                                dfsource = GeoJSONDataSource(geojson=merged_metro.to_json())
