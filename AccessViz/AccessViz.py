@@ -126,7 +126,7 @@ class explore:
                 print("Processing file travel_times_to_{0}.txt.. Progress: {1}/{2}".format(element,len([i for i in range(len(m_list))]), len(userinput)))
                 
                 
-#                fine the index of the grid ID(element) in the destination ids list created earlier.
+#                find the index of the grid ID(element) in the destination ids list created earlier.
                 element_index= dest_ids.index(str(element))
                 
                 #use this to find the corresponding file in the destination ids filename list created earlier
@@ -210,7 +210,7 @@ class explore:
                 print("Processing file travel_times_to_{0}.txt.. Progress: {1}/{2}".format(element,len([i for i in range(len(m_list))]), len(userinput)))
                 
                 
-#                fine the index of the grid ID(element) in the destination ids list created earlier.
+#                find the index of the grid ID(element) in the destination ids list created earlier.
                 element_index= dest_ids.index(str(element))
                 
                 #use this to find the corresponding file in the destination ids filename list created earlier
@@ -297,7 +297,7 @@ class explore:
                 print("Processing file travel_times_to_{0}.txt.. Progress: {1}/{2}".format(element,len([i for i in range(len(m_list))]), len(userinput)))
                 
                 
-#                fine the index of the grid ID(element) in the destination ids list created earlier.
+#                find the index of the grid ID(element) in the destination ids list created earlier.
                 element_index= dest_ids.index(str(element))
                 
                 #use this to find the corresponding file in the destination ids filename list created earlier
@@ -505,7 +505,7 @@ class explore:
                 print("Processing file travel_times_to_{0}.txt.. Progress: {1}/{2}".format(element,len([i for i in range(len(m_list))]), len(userinput)))
                 
                 
-#                fine the index of the grid ID(element) in the destination ids list created earlier.
+#                find the index of the grid ID(element) in the destination ids list created earlier.
                 element_index= dest_ids.index(str(element))
                 
                 #use this to find the corresponding file in the destination ids filename list created earlier
@@ -1040,7 +1040,7 @@ class explore:
                 print("Processing file travel_times_to_{0}.txt.. Progress: {1}/{2}".format(element,len([i for i in range(len(m_list))]), len(userinput)))
                 
                 
-#                fine the index of the grid ID(element) in the destination ids list created earlier.
+#                find the index of the grid ID(element) in the destination ids list created earlier.
                 element_index= dest_ids.index(str(element))
                 
                 #use this to find the corresponding file in the destination ids filename list created earlier
