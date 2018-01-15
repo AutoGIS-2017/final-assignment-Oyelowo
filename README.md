@@ -38,7 +38,7 @@ option to export files into thesame or separate folders
 
 **from AccessViz import explore**
 
-_Here, the name of the package is AccessViz, the module is AccessViz while the functions can be found in the class "explore".
+Here, the name of the package is AccessViz, the module is AccessViz while the functions can be found in the class "explore".
 
 By importing this way, the functions can be called as below:
 
