@@ -59,7 +59,7 @@ However, it is recommended to shorten the name when importing. For example:
 Different functions in the AccessViz module include: **_extract_prompt, extract, merge_shp, show_travel_mode and compare_travel_modes._** See below for the documentation.
 
 This [source code can be found here](https://github.com/AutoGIS-2017/final-assignment-Oyelowo/blob/master/AccessViz/AccessViz.py).
-It is also important to use the module get_geom which AccessViz depends on in some parts. The source code of this can be found [here](https://github.com/AutoGIS-2017/final-assignment-Oyelowo/blob/master/AccessViz/get_geom.py).
+It is also important to use the module [get_geom](https://github.com/AutoGIS-2017/final-assignment-Oyelowo/blob/master/AccessViz/get_geom.py) which AccessViz depends on in some parts.
 
 NOTE: for the travel time matrices, the file path of the zipped file should be specified while for the MetropoAcess grid, the shapefile can be loaded with the geopandas module.  
 
