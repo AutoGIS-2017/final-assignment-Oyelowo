@@ -25,6 +25,18 @@ from get_geom import get_geom
 from fiona.crs import from_epsg
 from bokeh.palettes import RdYlGn11 as palette2
 
+# ===========================================================================
+# When reading data from Bytes, you need to import it with BytesIO driver
+# ===========================================================================
+from io import BytesIO
+
+
+# ============================================================
+# H.T. General comments:
+#  - It is nice that you have used classes (not covered in the course) and written the functionality of the tool as a module!
+#  - You have quite a lot of duplicate code in here. It would have been good to wrap e.g. all reading parts from a Zipfile into a function instead of repeating the same code. 
+#    There was an error in reading the data into Pandas from Zipfile, now it was needed to fix the same pieces of code to multiple places. 
+#    If you would have used a function there would have been only one place where the code should have been fixed.
 
 
 
@@ -93,6 +105,13 @@ class explore:
                     
         separate_folder(True/False): this determines if the files should be extracted into same folder or separate folders. Default value is False.    
         """
+        
+        
+        # =====================================================================================================================================
+        # H.T. Comment: This function did not work because the files were inside a Zipfile and reading the data with Pandas weren't working. 
+        # Once the ttm-file is extracted or the bytes is read in with BytesIO wrapper, then I am able to read the data into Pandas. 
+        # =====================================================================================================================================
+        
     
         #this prompt the user to type in the YKR_ID. #This can also be done by just including the list in the argument.
         userinput= [int(x) for x in input("list the ID-numbers you want to read and separate each by a comma(,): ").split(',')]
@@ -132,20 +151,38 @@ class explore:
                 #use this to find the corresponding file in the destination ids filename list created earlier
                 element_file=dest_ids_file[element_index]
                 
+                
+                # ==========================================================================================
+                # You should not use a variable name 'bytes' because it is an built-in data type in Python
+                # ==========================================================================================
+                
                 #check the size of each file
-                bytes = data_zip.read(element_file)
+                #bytes = data_zip.read(element_file)
+                b = data_zip.read(element_file)
         
                 #print the file size
-                print('has',len(bytes),'bytes\n')
+                print('has',len(b),'bytes\n')
                 
                 
                 #export the matrices into different folders
                 if separate_folders==True:
                     #extract the available travel time matrix out of the specified by the user.
-                    data_zip.extract(element_file, path= filepath)
+                    
+                    # ===================
+                    # H.T. You can get the filepath from 'extract' function of zipfile that can be used to read the data into Pandas
+                    # ===================
+                    
+                    #data_zip.extract(element_file, path= filepath)
+                    
+                    extracted_fp = data_zip.extract(element_file, path= filepath)
+                    
+                # =======================================================================
+                # H.T. When reading bytes you need to read the 'bytes' with BytesIO
+                # =======================================================================
                 
                 #read the data
-                tt_matrices= pd.read_csv(element_file, sep=";")
+                #tt_matrices= pd.read_csv(element_file, sep=";")
+                tt_matrices= pd.read_csv(BytesIO(b), sep=";")
                 
                 #export all the files into thesame folder.
                 if separate_folders==False:
@@ -154,7 +191,6 @@ class explore:
              
         #check if all of the imputed values does not exist
         check_input(userinput=userinput, main_list=m_list)
-            
             
 
     
@@ -180,6 +216,11 @@ class explore:
                     
         separate_folder(True/False): this determines if the files should be extracted into same folder or separate folders. Default value is False.    
         """
+        
+        # =====================================================================================================================================
+        # H.T. Comment: This function did not work because the files were inside a Zipfile and reading the data with Pandas weren't working. 
+        # Once the ttm-file is extracted, then I am able to read the data into Pandas. 
+        # =====================================================================================================================================
         
               #read the zipped travel time matrices
         data_zip = zipfile.ZipFile(zipped_data_path, "r")
@@ -216,20 +257,43 @@ class explore:
                 #use this to find the corresponding file in the destination ids filename list created earlier
                 element_file=dest_ids_file[element_index]
                 
+               # ==========================================================================================
+                # You should not use a variable name 'bytes' because it is an built-in data type in Python
+                # ==========================================================================================
+                
                 #check the size of each file
-                bytes = data_zip.read(element_file)
+                #bytes = data_zip.read(element_file)
+                b = data_zip.read(element_file)
         
                 #print the file size
-                print('has',len(bytes),'bytes\n')
-                
+                print('has',len(b),'bytes\n')
                 
                 #export the matrices into different folders
                 if separate_folders==True:
                     #extract the available travel time matrix out of the specified by the user.
-                    data_zip.extract(element_file, path= filepath)
+                   
+                    # ===================
+                    # H.T. You can get the filepath from 'extract' function of zipfile that can be used to read the data into Pandas
+                    #data_zip.extract(element_file, path= filepath)
+                    
+                    extracted_fp = data_zip.extract(element_file, path= filepath)
+                    
+                
+                
+                # =========================================================================
+                # H.T. The 'element_file' is not a valid filepath and it produces and error
+                # =========================================================================
                 
                 #read the data
-                tt_matrices= pd.read_csv(element_file, sep=";")
+                #tt_matrices= pd.read_csv(element_file, sep=";")
+                    
+                # =======================================================================
+                # H.T. When reading bytes you need to read the 'bytes' with BytesIO
+                # =======================================================================
+                
+                #read the data
+                #tt_matrices= pd.read_csv(element_file, sep=";")
+                tt_matrices= pd.read_csv(BytesIO(b), sep=";")
                 
                 #export all the files into thesame folder.
                 if separate_folders==False:
@@ -240,9 +304,6 @@ class explore:
         check_input(userinput=userinput, main_list=m_list)
             
             
-
-
-
 
 # =============================================================================
 # 2. AccessViz can create Shapefiles from the chosen Matrix text tables (e.g. travel_times_to_5797076.txt) 
@@ -303,12 +364,30 @@ class explore:
                 #use this to find the corresponding file in the destination ids filename list created earlier
                 element_file=dest_ids_file[element_index]
                 
-                bytes = data_zip.read(element_file)
-                    #print the file size
-                print('has',len(bytes),'bytes\n')
+                # ==========================================================================================
+                # You should not use a variable name 'bytes' because it is an built-in data type in Python
+                # ==========================================================================================
                 
+                #check the size of each file
+                #bytes = data_zip.read(element_file)
+                b = data_zip.read(element_file)
+        
+                #print the file size
+                print('has',len(b),'bytes\n')
+                
+                # =======================================================================================
+                # H.T. The 'element_file' is not a valid filepath and it produces and error. See above!
+                # ======================================================================================
                     
-                tt_matrices= pd.read_csv(element_file, sep=";")
+                #tt_matrices= pd.read_csv(element_file, sep=";")
+                
+                # =======================================================================
+                # H.T. When reading bytes you need to read the 'bytes' with BytesIO
+                # =======================================================================
+                
+                #read the data
+                tt_matrices= pd.read_csv(BytesIO(b), sep=";")
+                
                 merged_metro = pd.merge(grid_shp,tt_matrices,  left_on="YKR_ID", right_on="from_id")
                 #print(merged_metro)
                 #merged_metro.to_file(driver= 'ESRI Shapefile', filename= filepath+"/"+str(element)+".shp")
@@ -512,12 +591,25 @@ class explore:
                 element_file=dest_ids_file[element_index]
                 
                 
-                bytes = data_zip.read(element_file)
-                    #print the file size
-                print('has',len(bytes),'bytes\n')
+                # ==========================================================================================
+                # You should not use a variable name 'bytes' because it is an built-in data type in Python
+                # ==========================================================================================
+                
+                #check the size of each file
+                #bytes = data_zip.read(element_file)
+                b = data_zip.read(element_file)
+        
+                #print the file size
+                print('has',len(b),'bytes\n')
                 
                     
-                tt_matrices= pd.read_csv(element_file, sep=";")
+                # =======================================================================
+                # H.T. When reading bytes you need to read the 'bytes' with BytesIO
+                # =======================================================================
+                
+                #read the data
+                #tt_matrices= pd.read_csv(element_file, sep=";")
+                tt_matrices= pd.read_csv(BytesIO(b), sep=";")
                 
                 #This is done to handle matrices with nodata at all. e.g: matrix"6016696"
                 if tt_matrices['to_id'].max()==-1:
@@ -1051,7 +1143,21 @@ class explore:
                 print('has',len(bytes),'bytes\n')
                
                 #read the data
-                tt_matrices= pd.read_csv(element_file, sep=";")
+                
+                # =========================================================================
+                # H.T. The 'element_file' is not a valid filepath and it produces and error
+                # =========================================================================
+                
+                #read the data
+                #tt_matrices= pd.read_csv(element_file, sep=";")
+                    
+                # =======================================================================
+                # H.T. When reading bytes you need to read the 'bytes' with BytesIO
+                # =======================================================================
+                
+                #read the data
+                #tt_matrices= pd.read_csv(element_file, sep=";")
+                tt_matrices= pd.read_csv(BytesIO(bytes), sep=";")
                 
                 column_list=[i for i in tt_matrices.columns]
                 

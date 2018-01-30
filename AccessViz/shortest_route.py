@@ -28,6 +28,7 @@ import osmnx as ox
 import networkx as nx
 from shapely.geometry import box
 import folium
+
 #fp= "http://blogs.helsinki.fi/accessibility/helsinki-region-travel-time-matrix-2015/"
 fp=r"C:\Users\oyeda\Desktop\AUTOGIS\FINAL_ASSIGNMENT"
 data_zip = zipfile.ZipFile((fp+"\HelsinkiRegion_TravelTimeMatrix2015.zip"), "r")
