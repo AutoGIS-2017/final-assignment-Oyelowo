@@ -11,6 +11,10 @@ Created on Fri Dec 29 23:41:01 2017
 #the most advanced students). This functionality can also be a separate program 
 #(it is not required to bundle include this with the rest of the AccessViz tool)
 
+# ======================================================
+# H.T. What are these functions? They are not present.
+# ======================================================
+
 from problem1 import lowo, zip2shp
 from visualise_tt import visual
 from problem4 import visual_comp

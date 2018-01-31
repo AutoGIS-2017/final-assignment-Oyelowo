@@ -2,6 +2,19 @@
 
 Read the final assignment instructions from the [https://autogis.github.io](https://automating-gis-processes.github.io/2017/lessons/FA/final-assignment.html).
 
+# Total points
+
+## Final assignment
+
+You got **45.75 / 50** points from the final assignment (grade 5/5)! Excellent work! There were some minor things that could be improved but altogether, good programming. 
+See more details about the grading criteria from [Final_Assignment_Assessment.md](Final_Assignment_Assessment.md).
+  
+## Course grade
+  
+You got **113 / 115 points** (grade 5/5) from the Exercises (Period II)! And 5/5 from the final assignment.  
+ 
+Your **final grade** from the course is: **5 / 5**. Excellent work!
+
 
 # AccessViz
   

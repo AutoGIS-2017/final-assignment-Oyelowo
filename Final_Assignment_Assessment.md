@@ -55,19 +55,26 @@ If the ID-number that the user has specified does not exist in the data folders,
 The tool should also inform the user about the execution process: tell the user what file is currently under process and how many files there are left
 (e.g. "Processing file travel_times_to_5797076.txt.. Progress: 3/25").
 
- - 7.5 points
+ - **5 / 7.5** points
+    
+    - Reading the data from ZipFile directly is a nice trick! However, it did not work as it should and I needed to change the code for making it work.
+    - There was a lot of repetitive code regarding reading the data from Zipfile. As there was a bug in this functionality, it was necessary to make the same change to many parts of the code. If that would have been written in a separate function, it would have been easy to fix it only in one place. 
 
 2. AccessViz can create Shapefiles from the chosen Matrix text tables (e.g. *travel_times_to_5797076.txt*) by joining the Matrix file with
 MetropAccess_YKR_grid Shapefile  where ``from_id`` in Matrix file corresponds to ``YKR_ID`` in the Shapefile. The tool saves the result in the output-folder
 that user has defined. You should name the files in a way that it is possible to identify the ID from the name (e.g. 5797076).
 
-  - 5 points
+  - **4.5 / 5** points
+    
+    - When saving the files, it is good to parse the outputfile paths with `os.path.join(directory, myFileName)` function instead of parsing the filepath with `directory + '/' + myFileName` because it works in a similar manner with all operating systems.
 
 3. AccessViz can visualize the travel times of selected YKR_IDs based on the travel mode that the user specifies. It can save those maps into a folder that user specifies. The output
 maps can be either **static** or **interactive** and user can choose which one with a parameter. You can freely design yourself the style of the map, colors, travel time intervals (classes)
 etc. Try to make the map as informative as possible!
 
-  - 10 points
+  - **10 / 10** points
+  
+    - Both visualizations works nicely! Good work!
 
 4. AccessViz can also compare **travel times** or **travel distances** between two different travel modes (more than two travel modes are not allowed).
 Thus IF the user has specified two travel modes (passed in as a list) for the AccessViz, the tool will calculate the time/distance difference of those travel modes
@@ -79,31 +86,42 @@ the tool should only create the Shapefile but not execute any calculations. It s
 Accepted travel modes are the same ones that are found in the actual TravelTimeMatrix file (pt_r_tt, car_t, etc.).
 If the user specifies something else, stop the program, and give advice what are the acceptable values.
 
-  - 10 points
+  - **9 / 10** points
+  
+    - Good work! The interactive map did not produce correct looking maps with my computer, but otherwise things works nicely. 
   
 Additionally, you should choose and implement one of the following functionalities:
-
-  - 7.5 points
 
 5. (option 1). Bundled with AccessViz there is also a separate interactive map that shows the YKR grid values in Helsinki region. The purpose of the map is to help the user to choose the YKR-IDs that s/he is interested to visualize / analyze.
 
 6. (option 2). AccessViz can also visualize the travel mode comparisons that were described in step 4. You can design the style of the map yourself, but try to make it as informative as possible!
 
 7. (option 3). AccessViz can also visualize shortest path routes (walking, cycling, and/or driving) using OpenStreetMap data from Helsinki Region. The impedance value for the routes can be distance (as was shown in Lesson 7) or time (optional for the most advanced students). This functionality can also be a separate program (it is not required to bundle include this with the rest of the AccessViz tool)
-
+  - **6.5 / 7.5** points
+  
+    - There were some unnecessary imports in the file and the code was fairly messy and slightly difficult to follow.   
 
 - Additional points can be given if more than one additional functionality was implemented (up to 5 points in total for the whole work)
+
+  - **2 / 5** points 
+    - Nice that you had implemented the zipfile reading functionality! +1 
+    - Nice that you used classes and made your code as a Python module! +1
 
 ## Documentation (10 points)
   
 - Is there a **general description** in the beginning of the code(s) about what the code does and **for what it is used for** and **a name of the programmer?**
   - Up to **1 point**
+   - **0.25 / 1** points ==> There was only the default output from Spyder in the beginning of the `AccessViz.py` script.  
 
 - Are the functions / functionalities described in the code? --> Up to **3 points**
+  - **3 / 3** points ==> Good documentation of the functions!
 
 - Is there a reasonable description about for what purpose the tool is used in the main documentation of the tool, i.e. repo's README.md document (a generic description)? --> Up to **3 points**
     - For what the tool can be used for? What kind of things it can solve / answer for?
     - Are there links to (possible) data that is used with the tool
+    - **3 / 3 points** ==> Good documentation with nice examples!
 
 - Is there an explanation and examples how the tool should be used? --> Up to **3 points**
     - As guideline, think that a person without prior knowledge about the tool would come and would like to use it..Could he manage with the documentation given?
+    - **2.5 / 3** points ==> There were good examples nice! There were some minor problems in the documentation such as having incorrect parameter in the fifth example code (below), and the explanation for Shapefile was a bit unclear (it should have mentioned GeoDataFrame)
+      

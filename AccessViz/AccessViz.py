@@ -217,11 +217,7 @@ class explore:
         separate_folder(True/False): this determines if the files should be extracted into same folder or separate folders. Default value is False.    
         """
         
-        # =====================================================================================================================================
-        # H.T. Comment: This function did not work because the files were inside a Zipfile and reading the data with Pandas weren't working. 
-        # Once the ttm-file is extracted, then I am able to read the data into Pandas. 
-        # =====================================================================================================================================
-        
+                
               #read the zipped travel time matrices
         data_zip = zipfile.ZipFile(zipped_data_path, "r")
         
@@ -332,6 +328,14 @@ class explore:
              
          
         """
+        
+        # =======================================================================================================
+        # H.T. It was a bit unclear from the documentation that the 'grid_shp' should have been a GeoDataFrame. 
+        # It would be better to mention that the grid_shp is a GeoDataFrame from that Shapefile. 
+        # For better usability, it would have been better to ask for a filepath to the Shapefile and your function 
+        # would take care of the reading in a similar manner as you do with the Zipfile. 
+        # =======================================================================================================
+        
         
         data_zip = zipfile.ZipFile(zipped_data_path, "r")
         
@@ -1050,6 +1054,11 @@ class explore:
         
         grid_shp=grid_shp.to_crs(from_epsg(3067))
         
+        
+        # ============================================================================================================================================
+        # H.T. If the user creates a static map, these GeoJSONDataSource conversions are not needed. Hence, these lines should be executed only if `map_type='interactive'`
+        # ============================================================================================================================================
+        
         if roads is None:
             print('You have not included the roads route')
         else:
@@ -1211,6 +1220,7 @@ class explore:
                         #when either or both of the modes is/are empty, the resultant difference
                         #should be nodata(i.e -1)
                         #create an empty column to imput the mode difference
+                                                
                         merged_metro[tt_col]=""
                         mode1_vs_mode2=[]
                         for idx, rows in merged_metro.iterrows():
@@ -1221,7 +1231,15 @@ class explore:
                                 difference= rows[mode1]-rows[mode2]
                                 mode1_vs_mode2.append(difference)
                         merged_metro[tt_col]=mode1_vs_mode2
+
+
+                        # ===========================================================================================================================================================================
+                        # H.T. The above works but is unnecessarily complicated and most likely a bit slow approach.
+                        # You could have dealed with the NoData values (-1) by replacing the -1 values with None and after
+                        # this you could have only calculated the difference using basic calculation functionalities of Pandas ==> merged_metro[tt_col] = merged_metro[mode1] - merged_metro[mode2]
+                        # ===========================================================================================================================================================================
                         
+                                                
 # =============================================================================
 #                            alternative
 #                             mode1_vs_mode2=[]
